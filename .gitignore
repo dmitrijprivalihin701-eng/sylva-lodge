@@ -1,0 +1,5 @@
+# локальные настройки Claude (сервер предпросмотра)
+.claude/
+# системный мусор Windows
+Thumbs.db
+desktop.ini
