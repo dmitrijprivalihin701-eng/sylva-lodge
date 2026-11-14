@@ -4,6 +4,13 @@
 потом переименовали в **Sylva Lodge** (sylva — «лес» по-латыни) и заменили все фото на стоковые,
 чтобы сайт не повторял эту компанию.
 
+## Ссылки
+- Сайт (GitHub Pages): https://dmitrijprivalihin701-eng.github.io/sylva-lodge/
+- Репозиторий (публичный): https://github.com/dmitrijprivalihin701-eng/sylva-lodge
+- Как обновить сайт после правок: в этой папке `git add -A`, `git commit -m "что поменяли"`, `git push`.
+  Pages пересобирается сам примерно за минуту.
+- Корневой `index.html` только перенаправляет на `site/`, сам сайт лежит в `site/index.html`.
+
 ## Файлы
 - `site/index.html`: весь сайт (один файл, стили и скрипт внутри)
 - `site/img/`: 13 фото с Unsplash (см. ниже)
