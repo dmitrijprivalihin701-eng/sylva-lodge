@@ -1,4 +1,4 @@
-# Пересборка видео-демо сайта. Сайт должен работать на http://localhost:8765
+﻿# Пересборка видео-демо сайта. Сайт должен работать на http://localhost:8765
 # Нужны: Python + playwright (pip install playwright; python -m playwright install ffmpeg), FFmpeg (winget Gyan.FFmpeg), Microsoft Edge.
 $ErrorActionPreference = 'Stop'
 $env:Path = [Environment]::GetEnvironmentVariable('Path','Machine') + ';' + [Environment]::GetEnvironmentVariable('Path','User')

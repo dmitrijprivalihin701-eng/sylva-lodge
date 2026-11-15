@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Макет чата с ботом заявок для ролика. Данные заявки приходят в адресной строке (#…JSON). Текст совпадает с notify_() из заявки/apps-script.gs -->
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{height:100vh;background:#0f1419;color:#e9edf1;font:15px/1.4 -apple-system,'Segoe UI',Roboto,sans-serif;display:flex;flex-direction:column;overflow:hidden}
+.status{height:44px;display:flex;justify-content:space-between;align-items:center;padding:0 22px;font-size:14px;font-weight:600}
+.head{display:flex;align-items:center;gap:12px;padding:8px 14px 12px;background:#17212b;border-bottom:1px solid #0b1015}
+.back{font-size:26px;color:#6ab3f3;margin-right:2px}
+.ava{width:42px;height:42px;border-radius:50%;background:radial-gradient(circle at 50% 38%,#2a2117,#0e0f0d 75%);display:grid;place-items:center}
+.ava svg{width:26px;height:26px}
+.who b{display:block;font-size:16px}
+.who span{font-size:13px;color:#7f91a4}
+.chat{flex:1;padding:14px 10px;display:flex;flex-direction:column;justify-content:flex-end;gap:8px;background:#0e1621 radial-gradient(circle at 30% 20%,rgba(255,255,255,.025),transparent 50%)}
+.day{align-self:center;font-size:12px;padding:3px 10px;border-radius:12px;background:rgba(0,0,0,.35);color:#c9d3dc;margin-bottom:4px}
+.msg{max-width:88%;background:#182533;border-radius:16px 16px 16px 4px;padding:9px 12px 6px;white-space:pre-line;font-size:15px}
+.msg .t{display:block;text-align:right;font-size:11px;color:#6d7f8f;margin-top:2px}
+.msg.old{opacity:.75}
+.btn{max-width:88%;width:88%;margin-top:-4px;text-align:center;padding:9px;border-radius:10px;background:rgba(24,37,51,.85);color:#e9edf1;font-size:14px}
+.new{opacity:0;transform:translateY(24px) scale(.96);transform-origin:left bottom}
+.show .new{opacity:1;transform:none;transition:opacity .45s ease,transform .55s cubic-bezier(.2,.9,.25,1.15)}
+.new2{display:none;opacity:0;transform:translateY(24px) scale(.96);transform-origin:left bottom}
+.show2 .new2{display:block}
+.show3 .new2{opacity:1;transform:none;transition:opacity .45s ease,transform .55s cubic-bezier(.2,.9,.25,1.15)}
+.old{display:block}
+.toast{position:absolute;left:10px;right:10px;top:-110px;display:flex;gap:12px;align-items:center;padding:12px 14px;border-radius:18px;background:rgba(40,44,50,.96);box-shadow:0 10px 30px rgba(0,0,0,.5);transition:top .5s cubic-bezier(.2,.9,.25,1.1)}
+.toast.on{top:50px}
+.toast .ava{width:38px;height:38px;flex:none}
+.toast b{display:block;font-size:14px}
+.toast span{font-size:13px;color:#c2cbd4;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:260px}
+.input{display:flex;align-items:center;gap:10px;padding:10px 12px 18px;background:#17212b}
+.input div{flex:1;height:38px;border-radius:20px;background:#0e1621;color:#6d7f8f;font-size:15px;display:flex;align-items:center;padding:0 14px}
+</style></head><body>
+<div class="status"><span id="clock">12:41</span><span>●●● ▮</span></div>
+<div class="head"><span class="back">‹</span>
+  <div class="ava"><svg viewBox="0 0 24 24" fill="none" stroke="#f2eee8" stroke-width="1.4"><path d="M12 3 L20.5 20 H3.5 Z"/><path d="M12 11 L15.4 17.4 H8.6 Z" fill="#d4782f" stroke="none"/></svg></div>
+  <div class="who"><b>Sylva Lodge · заявки</b><span>бот</span></div></div>
+<div class="chat" id="chat">
+  <div class="day">Сегодня</div>
+  <div class="msg old">🎁 <b>Сертификат</b>
+🎁 Номинал: 10 000 ₽
+
+👤 Ольга
+📞 +7 912 •••-••-44<span class="t">10:15</span></div>
+  <div class="msg new" id="m"></div>
+  <div class="btn new">📋 Открыть таблицу заявок</div>
+  <div class="msg new2" id="m2"></div>
+  <div class="btn new2">📋 Открыть таблицу заявок</div>
+</div>
+<div class="input"><div>Сообщение</div></div>
+<div class="toast" id="toast"><div class="ava"><svg viewBox="0 0 24 24" fill="none" stroke="#f2eee8" stroke-width="1.4"><path d="M12 3 L20.5 20 H3.5 Z"/><path d="M12 11 L15.4 17.4 H8.6 Z" fill="#d4782f" stroke="none"/></svg></div><div><b>Sylva Lodge · заявки</b><span id="tt"></span></div></div>
+<script>
+const d=JSON.parse(decodeURIComponent(location.hash.slice(1)||'%7B%7D'));
+const rub=n=>n?Number(n).toLocaleString('ru-RU')+' ₽':'';
+const date=s=>{if(!s)return'';const p=String(s).split('-');return p.length===3?p[2]+'.'+p[1]:s};
+const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;');
+const now=new Date();const hm=String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0');
+document.getElementById('clock').textContent=hm;
+// Сообщение 1 — как в notify_() скрипта v2: бронь с удержанием дат
+const until=d.holdUntil?new Date(d.holdUntil):new Date(Date.now()+3*864e5);
+const untilS=until.toLocaleString('ru-RU',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'}).replace(',','');
+const head='⏳ <b>Бронь'+(d.house?': '+esc(d.house):'')+'</b>'+(d.id?' · '+esc(d.id):'');
+const lines=[head,
+ d.checkin?'📅 '+date(d.checkin)+' — '+date(d.checkout)+(d.nights?' ('+d.nights+' ноч.)':''):'',
+ d.guests?'👥 Гостей: '+esc(d.guests):'',
+ d.extras?'➕ '+esc(d.extras):'',
+ d.total?'💰 '+rub(d.total)+(d.prepay?', предоплата '+rub(d.prepay):''):'',
+ '⏳ Даты закреплены до '+untilS+' — ждём предоплату',
+ '','👤 '+esc(d.name||'—'),'📞 '+esc(d.phone||'—'), d.comment?'💬 '+esc(d.comment):''].filter((l,i,a)=>l!==''||(i>0&&a[i-1]!==''));
+document.getElementById('m').innerHTML=lines.join('\n')+'<span class="t">'+hm+'</span>';
+// Сообщение 2 — как в pay_(): предоплата получена
+document.getElementById('m2').innerHTML='✅ <b>Предоплата получена</b>\nБронь '+esc(d.id||'')+' · '+esc(d.house||'')+'\n📅 '+date(d.checkin)+' — '+date(d.checkout)+'\n💰 '+rub(d.prepay)+' из '+rub(d.total)+'\n👤 '+esc(d.name||'')+', '+esc(d.phone||'')+'<span class="t">'+hm+'</span>';
+document.getElementById('tt').textContent='Бронь: '+(d.house||'')+(d.total?' · '+rub(d.total):'')+' · '+(d.name||'');
+setTimeout(()=>document.getElementById('toast').classList.add('on'),400);
+setTimeout(()=>{document.getElementById('toast').classList.remove('on');document.body.classList.add('show')},1700);
+setTimeout(()=>{document.getElementById('tt').textContent='✅ Предоплата получена · '+rub(d.prepay);document.getElementById('toast').classList.add('on')},3600);
+setTimeout(()=>{document.getElementById('toast').classList.remove('on');document.body.classList.add('show2');requestAnimationFrame(()=>requestAnimationFrame(()=>document.body.classList.add('show3')))},4900);
+</script>
+</body></html>
