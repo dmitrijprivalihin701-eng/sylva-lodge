@@ -347,6 +347,168 @@ footer{margin-top:clamp(60px,8vw,100px);padding-top:24px;border-top:1px solid va
   .form .row{grid-template-columns:1fr;gap:0}
   .mix .row2{padding-left:0}
 }
+/* ===================== НОВЫЕ БЛОКИ (оптимум по анализу конкурентов) ===================== */
+.sec-title{font-family:var(--display);font-weight:200;font-size:clamp(40px,5.6vw,76px);line-height:1;letter-spacing:-.02em}
+.sec-sub{color:var(--muted);font-size:15px;max-width:420px}
+.demo-chip{display:inline-block;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent2);border:1px solid rgba(235,163,95,.4);border-radius:999px;padding:3px 9px}
+
+/* Строка бронирования под первым экраном */
+.bookbar{padding:28px 0 0}
+.bk{display:grid;grid-template-columns:1fr 1fr .8fr auto;gap:12px;align-items:end;padding:18px}
+.bk-f label{display:block;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin:0 0 6px 4px}
+.bk-f input,.bk-f select,.mfield input,.mfield textarea{width:100%;height:52px;padding:0 16px;border-radius:12px;border:1px solid var(--line2);background:rgba(0,0,0,.3);color:var(--text);font:inherit;font-size:15px;color-scheme:dark;outline:none;transition:border-color .2s}
+.bk-f input:focus,.bk-f select:focus,.mfield input:focus,.mfield textarea:focus{border-color:var(--accent2)}
+.bk .btn{height:52px;padding:0 28px}
+.bk-note{display:flex;gap:18px;flex-wrap:wrap;margin:12px 4px 0;font-size:12px;color:var(--muted)}
+.bk-note span::before{content:"✓";color:var(--accent);margin-right:6px}
+.bk-err{color:#f08a6a;font-size:13px;margin:10px 4px 0;display:none}
+
+/* Домики */
+.houses-head{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap;margin-bottom:28px}
+.house-res{margin-bottom:26px;padding:14px 18px;border-radius:14px;border:1px dashed var(--line2);font-size:14px;color:var(--muted)}
+.house-res b{color:var(--text);font-weight:600}
+.houses{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2vw,24px)}
+.house{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:22px;overflow:hidden;background:var(--bg2);transition:border-color .3s,transform .4s var(--ease)}
+.house:hover{border-color:var(--line2);transform:translateY(-4px)}
+.house.busy{opacity:.55}
+.house.free{border-color:rgba(212,120,47,.55)}
+.house-ph{position:relative;height:clamp(200px,20vw,260px);overflow:hidden}
+.house-ph div{position:absolute;inset:0;transition:transform 1.2s var(--ease)}
+.house:hover .house-ph div{transform:scale(1.05)}
+.house-badge{position:absolute;left:14px;top:14px;z-index:1;padding:6px 12px;border-radius:999px;font-size:12px;font-weight:600;background:rgba(14,15,13,.7);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.house-badge.ok{background:var(--accent);color:#140c05}
+.house-body{display:flex;flex-direction:column;gap:14px;padding:20px 20px 22px;flex:1}
+.house-body h3{font-family:var(--display);font-weight:300;font-size:26px;line-height:1.1}
+.house-cap{font-size:13px;color:var(--muted)}
+.house-body p{font-size:14px;color:var(--muted)}
+.house-tags{list-style:none;display:flex;flex-wrap:wrap;gap:6px}
+.house-tags li{font-size:12px;padding:5px 10px;border-radius:999px;border:1px solid var(--line)}
+.house-price{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:auto;padding-top:14px;border-top:1px solid var(--line)}
+.house-price small{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.house-price b{font-family:var(--display);font-weight:400;font-size:24px}
+.house-total{font-size:14px;color:var(--accent2);min-height:20px}
+.house .btn{justify-content:center}
+.house .btn[disabled]{opacity:.4;pointer-events:none}
+.extras{margin-top:clamp(40px,5vw,60px);display:grid;grid-template-columns:.7fr 2fr;gap:clamp(20px,4vw,50px)}
+.extras h3{font-family:var(--display);font-weight:300;font-size:30px;line-height:1.1;margin:10px 0 10px}
+.extras-list{list-style:none;display:grid;grid-template-columns:1fr 1fr;column-gap:40px}
+.extras-list li{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:14px 0;border-bottom:1px solid var(--line);font-size:15px}
+.extras-list li span:last-child{white-space:nowrap;color:var(--accent2);font-family:var(--display);font-size:17px}
+.extras-list li small{display:block;font-size:12px;color:var(--muted)}
+
+/* Сценарии «для кого» */
+.for-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(12px,1.6vw,20px);margin-top:40px}
+.for-card{position:relative;padding:26px 24px;border:1px solid var(--line);border-radius:20px;background:linear-gradient(160deg,rgba(255,255,255,.03),transparent);transition:border-color .3s,background .3s}
+.for-card:hover{border-color:rgba(212,120,47,.5);background:linear-gradient(160deg,rgba(212,120,47,.08),transparent)}
+.for-card svg{width:30px;height:30px;color:var(--accent2);margin-bottom:18px}
+.for-card h3{font-family:var(--display);font-weight:400;font-size:21px;margin-bottom:8px}
+.for-card p{font-size:14px;color:var(--muted)}
+.for-card .link{display:inline-block;margin-top:14px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent2);border-bottom:1px solid rgba(235,163,95,.4);padding-bottom:2px}
+
+/* Отзывы */
+.rev-grid{display:grid;grid-template-columns:.8fr 2.2fr;gap:clamp(20px,3vw,40px);align-items:start}
+.rev-score b{display:block;font-family:var(--display);font-weight:200;font-size:clamp(80px,10vw,130px);line-height:.9;color:var(--accent2)}
+.stars{color:var(--accent2);letter-spacing:4px;font-size:18px}
+.rev-score p{color:var(--muted);font-size:14px;margin:10px 0 22px}
+.rev-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.rev{padding:22px;border-radius:18px;border:1px solid var(--line);background:var(--bg2);display:flex;flex-direction:column;gap:12px}
+.rev p{font-size:14px;line-height:1.6}
+.rev footer{margin:auto 0 0;padding:0;border:0;display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--muted)}
+
+/* Акции + сертификаты */
+.gifts-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(20px,3vw,40px);margin-top:40px;align-items:stretch}
+.offers{display:flex;flex-direction:column;gap:14px}
+.offer{display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:center;padding:20px 22px;border-radius:18px;border:1px solid var(--line);background:var(--bg2)}
+.offer b.big{font-family:var(--display);font-weight:300;font-size:40px;line-height:1;color:var(--accent2);min-width:96px}
+.offer h3{font-family:var(--display);font-weight:400;font-size:19px;margin-bottom:4px}
+.offer p{font-size:13px;color:var(--muted)}
+.cert{position:relative;overflow:hidden;padding:clamp(24px,3vw,34px);border-radius:22px;border:1px solid rgba(235,163,95,.35);background:radial-gradient(circle at 85% 15%,rgba(212,120,47,.28),transparent 55%),linear-gradient(150deg,#1d1c18,#121310);display:flex;flex-direction:column;gap:18px}
+.cert::after{content:"";position:absolute;right:-60px;bottom:-60px;width:220px;height:220px;border:1px solid rgba(235,163,95,.18);transform:rotate(45deg)}
+.cert-top{display:flex;justify-content:space-between;align-items:center;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.cert h3{font-family:var(--display);font-weight:200;font-size:clamp(34px,3.6vw,46px);line-height:1}
+.cert-sum{font-family:var(--display);font-weight:300;font-size:clamp(44px,5vw,64px);line-height:1;color:var(--accent2)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;position:relative;z-index:1}
+.chip{padding:9px 14px;border-radius:999px;border:1px solid var(--line2);font-size:13px;transition:.2s}
+.chip.on,.chip:hover{border-color:var(--accent2);color:var(--accent2)}
+.cert p{font-size:13px;color:var(--muted);position:relative;z-index:1}
+.cert .btn{align-self:flex-start;position:relative;z-index:1}
+
+/* FAQ */
+.faq-grid{display:grid;grid-template-columns:.8fr 1.6fr;gap:clamp(24px,4vw,60px);align-items:start}
+.faq-side{position:sticky;top:100px}
+.faq-side p{color:var(--muted);font-size:15px;margin:16px 0 24px}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:20px;padding:20px 0;font-family:var(--display);font-weight:400;font-size:clamp(17px,1.6vw,20px)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";flex:none;width:28px;height:28px;border-radius:50%;border:1px solid var(--line2);display:grid;place-items:center;font-size:18px;color:var(--accent2);transition:transform .3s var(--ease)}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{padding:0 48px 22px 0;color:var(--muted);font-size:15px}
+
+/* Окно заявки */
+.modal{position:fixed;inset:0;z-index:95;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(8,8,7,.82);opacity:0;visibility:hidden;transition:opacity .3s var(--ease),visibility .3s}
+.modal.open{opacity:1;visibility:visible}
+.modal-box{position:relative;width:min(480px,100%);max-height:92vh;overflow:auto;padding:28px;border-radius:22px;background:#171814;border:1px solid var(--line2);transform:translateY(16px);transition:transform .35s var(--ease)}
+.modal.open .modal-box{transform:none}
+.modal-box h3{font-family:var(--display);font-weight:300;font-size:28px;line-height:1.1;margin-bottom:6px;padding-right:30px}
+.modal-sum{margin:14px 0 18px;padding:14px 16px;border-radius:12px;background:rgba(255,255,255,.04);font-size:14px;line-height:1.7}
+.modal-sum b{color:var(--accent2)}
+.mfield{margin-bottom:10px}
+.mfield textarea{height:84px;padding:12px 16px;resize:vertical}
+.modal-box .btn{width:100%;justify-content:center;padding:16px;margin-top:6px}
+.modal-x{position:absolute;top:14px;right:14px;width:38px;height:38px;border-radius:50%;border:1px solid var(--line2);font-size:20px}
+.consent{font-size:11px;color:var(--dim);margin-top:10px;line-height:1.5}
+.consent a{text-decoration:underline}
+.modal-ok{display:none;text-align:center;padding:20px 0}
+.modal-ok b{display:block;font-family:var(--display);font-weight:300;font-size:26px;margin-bottom:8px}
+.modal.sent form{display:none}.modal.sent .modal-ok{display:block}
+
+/* Плавающая кнопка мессенджеров */
+.chat{position:fixed;right:20px;bottom:20px;z-index:70;display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+.chat-btn{width:58px;height:58px;border-radius:50%;background:var(--accent);color:#140c05;display:grid;place-items:center;box-shadow:0 10px 30px rgba(212,120,47,.35);transition:transform .3s var(--ease)}
+.chat-btn:hover{transform:scale(1.06)}
+.chat-btn svg{width:26px;height:26px}
+.chat-btn::after{content:"";position:absolute;width:58px;height:58px;border-radius:50%;border:2px solid var(--accent);animation:ring 2.4s infinite}
+@keyframes ring{0%{transform:scale(1);opacity:.7}100%{transform:scale(1.5);opacity:0}}
+.chat-list{display:flex;flex-direction:column;gap:8px;opacity:0;transform:translateY(10px);pointer-events:none;transition:.3s var(--ease)}
+.chat.open .chat-list{opacity:1;transform:none;pointer-events:auto}
+.chat-list a{display:flex;align-items:center;gap:10px;padding:10px 16px 10px 12px;border-radius:999px;font-size:14px;background:#1d1e1a;border:1px solid var(--line2);white-space:nowrap}
+.chat-list a i{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:12px;font-weight:700;color:#fff}
+.chat-list a:hover{border-color:var(--accent2)}
+
+/* Cookies и уведомления */
+.cookie{position:fixed;left:20px;bottom:20px;z-index:69;max-width:420px;padding:16px 18px;display:flex;gap:14px;align-items:center;font-size:13px;color:var(--muted);transform:translateY(160%);transition:transform .5s var(--ease)}
+.cookie.show{transform:none}
+.cookie a{color:var(--text);text-decoration:underline}
+.cookie .btn{padding:10px 16px;flex:none}
+.toast{position:fixed;left:50%;bottom:96px;z-index:99;transform:translate(-50%,20px);opacity:0;padding:12px 18px;border-radius:12px;background:#24251f;border:1px solid var(--line2);font-size:14px;transition:.35s var(--ease);pointer-events:none;max-width:calc(100% - 32px);text-align:center}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.legal{display:flex;gap:18px;flex-wrap:wrap}
+.legal a:hover{color:var(--text)}
+
+@media (max-width:1080px){
+  .houses{grid-template-columns:1fr 1fr}
+  .rev-grid{grid-template-columns:1fr}
+  .rev-cards{grid-template-columns:1fr 1fr 1fr}
+  .extras{grid-template-columns:1fr}
+}
+@media (max-width:820px){
+  .bk{grid-template-columns:1fr 1fr}
+  .bk .btn{grid-column:1/-1}
+  .houses{grid-template-columns:1fr}
+  .for-grid{grid-template-columns:1fr 1fr}
+  .rev-cards{grid-template-columns:1fr}
+  .gifts-grid{grid-template-columns:1fr}
+  .faq-grid{grid-template-columns:1fr}
+  .faq-side{position:static}
+  .extras-list{grid-template-columns:1fr}
+}
+@media (max-width:640px){
+  .for-grid{grid-template-columns:1fr}
+  .offer b.big{font-size:32px;min-width:76px}
+  .chat{right:16px;bottom:16px}
+  .cookie{left:16px;right:16px;bottom:88px;max-width:none}
+  .faq details p{padding-right:0}
+}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
 }
@@ -378,18 +540,18 @@ footer{margin-top:clamp(60px,8vw,100px);padding-top:24px;border-top:1px solid va
 <div class="mini glass" id="mini">
   <a href="#top" class="logo" data-go>SYLVA&nbsp;LODGE</a>
   <nav class="nav-links">
-    <a href="#intro" data-go>Отдых</a><a href="#dom" data-go>Домик</a><a href="#price" data-go>Цены</a><a href="#contacts" data-go>Контакты</a>
+    <a href="#intro" data-go>Отдых</a><a href="#price" data-go>Домики</a><a href="#gifts" data-go>Подарки</a><a href="#faq" data-go>Вопросы</a><a href="#contacts" data-go>Контакты</a>
   </nav>
-  <a href="#contacts" class="btn btn-accent" data-go>Забронировать</a>
+  <a href="#booking" class="btn btn-accent" data-go>Забронировать</a>
 </div>
 
 <!-- Мобильное меню -->
 <div class="mmenu" id="mmenu">
   <button class="close" id="mclose" aria-label="Закрыть меню">×</button>
-  <a class="big" href="#intro" data-go>Отдых</a>
-  <a class="big" href="#dom" data-go>Домик</a>
-  <a class="big" href="#price" data-go>Цены</a>
-  <a class="big" href="#steps" data-go>Бронь</a>
+  <a class="big" href="#booking" data-go>Даты</a>
+  <a class="big" href="#price" data-go>Домики</a>
+  <a class="big" href="#gifts" data-go>Подарки</a>
+  <a class="big" href="#faq" data-go>Вопросы</a>
   <a class="big" href="#contacts" data-go>Контакты</a>
   <a class="btn btn-accent" style="margin-top:28px;align-self:flex-start" href="tel:+73430000000">+7 (343) 000-00-00</a>
 </div>
@@ -405,13 +567,14 @@ footer{margin-top:clamp(60px,8vw,100px);padding-top:24px;border-top:1px solid va
       </a>
       <nav class="nav-links">
         <a href="#intro" data-go>Отдых</a>
-        <a href="#dom" data-go>Домик</a>
-        <a href="#price" data-go>Цены</a>
+        <a href="#price" data-go>Домики</a>
+        <a href="#gifts" data-go>Подарки</a>
+        <a href="#faq" data-go>Вопросы</a>
         <a href="#contacts" data-go>Контакты</a>
       </nav>
       <div class="nav-cta">
         <a class="nav-tel" href="tel:+73430000000">+7 (343) 000-00-00</a>
-        <a href="#contacts" class="btn btn-light" data-go>Забронировать</a>
+        <a href="#booking" class="btn btn-light" data-go>Забронировать</a>
         <button class="burger" id="burger" aria-label="Открыть меню"><span></span></button>
       </div>
     </div>
@@ -423,7 +586,7 @@ footer{margin-top:clamp(60px,8vw,100px);padding-top:24px;border-top:1px solid va
       </h1>
       <div class="h-note h-note-r fade-up d1">Домик в соснах<br>в черте Екатеринбурга<br>— а будто за тысячу км</div>
       <div class="h-note h-note-l fade-up d2">Баня. Горячий чан.<br>Панорамное окно<br>в небо</div>
-      <a href="#price" class="h-link fade-up d3" data-go>Узнать свободные даты
+      <a href="#booking" class="h-link fade-up d3" data-go>Узнать свободные даты
         <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 11 L11 3 M5 3 H11 V9"/></svg></a>
     </div>
 
@@ -439,13 +602,30 @@ footer{margin-top:clamp(60px,8vw,100px);padding-top:24px;border-top:1px solid va
         <small>Новогодние даты бронируют заранее</small>
       </div>
       <div class="stats fade-up d4">
-        <a href="#contacts" class="stat" data-go><b>5,0</b><div><span>Оценка<br>гостей</span><span class="arr"><svg viewBox="0 0 14 14" fill="none" stroke-width="1.6"><path d="M3 11 L11 3 M5 3 H11 V9"/></svg></span></div></a>
+        <a href="#reviews" class="stat" data-go><b>5,0</b><div><span>Оценка<br>гостей</span><span class="arr"><svg viewBox="0 0 14 14" fill="none" stroke-width="1.6"><path d="M3 11 L11 3 M5 3 H11 V9"/></svg></span></div></a>
         <a href="#price" class="stat" data-go><b><small>от</small> 5&nbsp;000</b><div><span>₽ за сутки<br>в домике</span><span class="arr"><svg viewBox="0 0 14 14" fill="none" stroke-width="1.6"><path d="M3 11 L11 3 M5 3 H11 V9"/></svg></span></div></a>
       </div>
     </div>
   </div>
   <div class="vert">глэмпинг · Екатеринбург</div>
 </header>
+
+<!-- ===================== ПОИСК СВОБОДНЫХ ДАТ (демо-модуль бронирования) ===================== -->
+<section class="bookbar" id="booking" data-offset="90">
+  <div class="wrap">
+    <form class="bk glass" id="bk" novalidate>
+      <div class="bk-f"><label for="bkIn">Заезд</label><input type="date" id="bkIn" required></div>
+      <div class="bk-f"><label for="bkOut">Выезд</label><input type="date" id="bkOut" required></div>
+      <div class="bk-f"><label for="bkG">Гости</label>
+        <select id="bkG"><option value="1">1 гость</option><option value="2" selected>2 гостя</option><option value="3">3 гостя</option><option value="4">4 гостя</option><option value="5">5 гостей</option><option value="6">6 гостей</option></select>
+      </div>
+      <button class="btn btn-accent" type="submit">Найти домик
+        <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 11 L11 3 M5 3 H11 V9"/></svg></button>
+    </form>
+    <div class="bk-err" id="bkErr">Дата выезда должна быть позже даты заезда</div>
+    <div class="bk-note"><span>Сразу видно свободные домики и цену</span><span>Предоплата 30%</span><span>Бесплатная отмена за 7 дней</span></div>
+  </div>
+</section>
 
 <!-- ===================== 2. УСТАЛИ ОТ ГОРОДА (структура) ===================== -->
 <section class="sec" id="intro">
@@ -473,7 +653,7 @@ footer{margin-top:clamp(60px,8vw,100px);padding-top:24px;border-top:1px solid va
       <div class="tired">
         <h2 class="reveal">Устали от городской суеты?</h2>
         <p class="reveal r2">Медленное утро, кофе на террасе и сосны вместо окон соседнего дома. Ваше время здесь идёт по ритму рассвета, пара из бани и звёзд над горячим чаном.</p>
-        <a href="#contacts" class="btn btn-accent reveal r3" data-go>Забронировать домик</a>
+        <a href="#booking" class="btn btn-accent reveal r3" data-go>Забронировать домик</a>
       </div>
     </div>
     <ul class="toc reveal r2">
@@ -552,26 +732,164 @@ footer{margin-top:clamp(60px,8vw,100px);padding-top:24px;border-top:1px solid va
   </div>
 </section>
 
-<!-- ===================== 5. ЦЕНА ===================== -->
-<section class="sec" id="price">
+<!-- ===================== 5. ДОМИКИ И ЦЕНЫ ===================== -->
+<section class="sec" id="price" data-offset="70">
   <div class="wrap">
-    <div class="price-box reveal">
-      <div class="price-l">
-        <span class="eyebrow">Стоимость</span>
-        <h2>Сутки тишины</h2>
-        <div class="price-big"><b>5&nbsp;000&nbsp;₽</b><span>от, за сутки<br>в домике</span></div>
-        <ul class="incl">
-          <li>Домик A‑frame целиком</li>
-          <li>Терраса с креслами</li>
-          <li>Баня — по запросу</li>
-          <li>Горячий чан — по запросу</li>
-        </ul>
-        <a href="#contacts" class="btn btn-accent" data-go>Узнать цену на мои даты
-          <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 11 L11 3 M5 3 H11 V9"/></svg></a>
+    <div class="houses-head">
+      <div><span class="eyebrow reveal">Домики и цены</span><h2 class="sec-title reveal r2" style="margin-top:14px">Выберите свой домик</h2></div>
+      <p class="sec-sub reveal r3">Цена за весь домик, а не за человека. В стоимость входят бельё, полотенца, Wi‑Fi, мангал и дрова.</p>
+    </div>
+    <div class="house-res reveal" id="houseRes">Выберите даты в строке бронирования — покажем свободные домики и сразу посчитаем стоимость.</div>
+    <div class="houses">
+      <article class="house reveal" data-house="pine">
+        <div class="house-ph"><div data-bg style="background-image:url(img/cabin.jpg)"></div><span class="house-badge">A‑frame</span></div>
+        <div class="house-body">
+          <div><h3>Pine</h3><span class="house-cap">до 2 гостей · 32 м² · двуспальная кровать</span></div>
+          <p>Уютный A‑frame для двоих: панорамное окно в сосны и терраса с креслами.</p>
+          <ul class="house-tags"><li>Панорамное окно</li><li>Мини‑кухня</li><li>Душ</li><li>Можно с собакой</li></ul>
+          <div class="house-price"><div><small>Вс–Чт</small><b>5&nbsp;000&nbsp;₽</b></div><div><small>Пт–Сб</small><b>6&nbsp;500&nbsp;₽</b></div></div>
+          <div class="house-total"></div>
+          <button class="btn btn-accent" data-book="pine">Забронировать</button>
+        </div>
+      </article>
+      <article class="house reveal r2" data-house="grand">
+        <div class="house-ph"><div data-bg style="background-image:url(img/topic-cabin.jpg)"></div><span class="house-badge">A‑frame</span></div>
+        <div class="house-body">
+          <div><h3>Grand</h3><span class="house-cap">до 4 гостей · 48 м² · 2 спальных места</span></div>
+          <p>Большой A‑frame со вторым светом: спальня на мансарде, гостиная с камином.</p>
+          <ul class="house-tags"><li>Камин</li><li>Кухня</li><li>Терраса с гирляндой</li><li>Можно с собакой</li></ul>
+          <div class="house-price"><div><small>Вс–Чт</small><b>7&nbsp;500&nbsp;₽</b></div><div><small>Пт–Сб</small><b>9&nbsp;500&nbsp;₽</b></div></div>
+          <div class="house-total"></div>
+          <button class="btn btn-accent" data-book="grand">Забронировать</button>
+        </div>
+      </article>
+      <article class="house reveal r3" data-house="family">
+        <div class="house-ph"><div data-bg style="background-image:url(img/house-family.jpg)"></div><span class="house-badge">Дом</span></div>
+        <div class="house-body">
+          <div><h3>Family House</h3><span class="house-cap">до 6 гостей · 70 м² · 3 спальни</span></div>
+          <p>Дом для семьи или компании: веранда, большая кухня‑гостиная и своя баня рядом.</p>
+          <ul class="house-tags"><li>3 спальни</li><li>Веранда</li><li>Баня рядом</li><li>Детская кроватка</li></ul>
+          <div class="house-price"><div><small>Вс–Чт</small><b>11&nbsp;000&nbsp;₽</b></div><div><small>Пт–Сб</small><b>14&nbsp;000&nbsp;₽</b></div></div>
+          <div class="house-total"></div>
+          <button class="btn btn-accent" data-book="family">Забронировать</button>
+        </div>
+      </article>
+    </div>
+
+    <div class="extras">
+      <div class="reveal">
+        <span class="eyebrow">Дополнительно</span>
+        <h3>Баня, чан и маленькие радости</h3>
+        <p class="sec-sub">Заказываются при бронировании или у администратора на месте. <span class="demo-chip">демо‑цены</span></p>
       </div>
-      <div class="price-r">
-        <div data-bg style="background-image:url(img/bedroom.jpg)"></div>
-        <div class="glass"><b>Точная стоимость</b>зависит от дат, количества гостей и того, нужны ли баня и чан. Подскажем по телефону за пару минут.</div>
+      <ul class="extras-list reveal r2">
+        <li><span>Баня на дровах<small>2 часа, каждый следующий +1&nbsp;000&nbsp;₽</small></span><span>2&nbsp;500&nbsp;₽</span></li>
+        <li><span>Горячий чан с травами<small>протопка, 3–4 часа</small></span><span>4&nbsp;000&nbsp;₽</span></li>
+        <li><span>Веники и запарки<small>берёза, дуб, эвкалипт</small></span><span>600&nbsp;₽</span></li>
+        <li><span>Завтрак в домик<small>за гостя</small></span><span>700&nbsp;₽</span></li>
+        <li><span>Питомец<small>в домиках Pine и Grand, за сутки</small></span><span>1&nbsp;000&nbsp;₽</span></li>
+        <li><span>Поздний выезд<small>за час, по наличию</small></span><span>1&nbsp;000&nbsp;₽</span></li>
+        <li><span>Кинопроектор<small>на весь вечер</small></span><span>500&nbsp;₽</span></li>
+        <li><span>Оформление к празднику<small>шары, гирлянды, лепестки</small></span><span>от&nbsp;3&nbsp;000&nbsp;₽</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 6. ДЛЯ КОГО: сценарии, праздники, с собакой ===================== -->
+<section class="sec" id="for" style="padding-top:0">
+  <div class="wrap">
+    <div class="houses-head">
+      <div><span class="eyebrow reveal">Для кого</span><h2 class="sec-title reveal r2" style="margin-top:14px">Каждый находит здесь своё</h2></div>
+      <p class="sec-sub reveal r3">Расскажите, какой отдых вы хотите, а мы подготовим домик заранее.</p>
+    </div>
+    <div class="for-grid">
+      <div class="for-card reveal">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M16 27s-10-6.2-10-13.2A5.6 5.6 0 0 1 16 10.6a5.6 5.6 0 0 1 10 3.2C26 20.8 16 27 16 27Z"/></svg>
+        <h3>Вдвоём</h3><p>Тишина, чан под звёздами, завтрак в домик и никаких соседей за стенкой.</p>
+      </div>
+      <div class="for-card reveal r2">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="11" cy="9" r="3.5"/><circle cx="22" cy="11" r="2.5"/><path d="M4 26c0-4.4 3.1-8 7-8s7 3.6 7 8M17 26c0-3.3 2.2-6 5-6s5 2.7 5 6"/></svg>
+        <h3>Семьёй с детьми</h3><p>Family House на 6 гостей, детская кроватка и посуда, безопасная территория и костёр с зефиром.</p>
+      </div>
+      <div class="for-card reveal r3">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 25 16 6l10 19Z"/><path d="M12 25l4-7 4 7"/></svg>
+        <h3>Компанией друзей</h3><p>Баня, мангал, настолки и проектор. Большой дом, где хватит места всем.</p>
+      </div>
+      <div class="for-card reveal">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="9" cy="12" r="2.4"/><circle cx="16" cy="8.5" r="2.4"/><circle cx="23" cy="12" r="2.4"/><path d="M16 15c-4 0-7.5 4.5-7.5 8 0 2 1.6 3 3.4 3 1.6 0 2.6-.8 4.1-.8s2.5.8 4.1.8c1.8 0 3.4-1 3.4-3 0-3.5-3.5-8-7.5-8Z"/></svg>
+        <h3>С собакой</h3><p>Домики Pine и Grand — dog friendly. Миска и лежанка уже ждут, вокруг лес для долгих прогулок.</p>
+      </div>
+      <div class="for-card reveal r2">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 27h20M8 27V16h16v11M8 20c2.7 0 2.7 2 5.3 2s2.7-2 5.4-2 2.6 2 5.3 2M16 16v-4M16 12c-1.2-1.2-1.2-3 0-5 1.2 2 1.2 3.8 0 5Z"/></svg>
+        <h3>День рождения и девичник</h3><p>Шары, гирлянды, торт и чан с лепестками — оформим домик к вашему приезду.</p>
+        <a href="#" class="link" data-event="День рождения / девичник">Подготовить праздник →</a>
+      </div>
+      <div class="for-card reveal r3">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="16" cy="19" r="7"/><path d="m12.5 7 3.5 5 3.5-5-1.5-2h-4Z"/></svg>
+        <h3>Предложение руки и сердца</h3><p>Свечи, лепестки, фотограф и тишина. Поможем, чтобы ответом точно было «да».</p>
+        <a href="#" class="link" data-event="Предложение руки и сердца">Подготовить сюрприз →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 7. ОТЗЫВЫ ===================== -->
+<section class="sec" id="reviews" style="padding-top:0" data-offset="80">
+  <div class="wrap rev-grid">
+    <div class="rev-score reveal">
+      <span class="eyebrow">Отзывы гостей</span>
+      <b style="margin-top:14px">5,0</b>
+      <div class="stars">★★★★★</div>
+      <p>Рейтинг на Яндекс Картах. В рабочей версии здесь будет живой виджет с отзывами.</p>
+      <a href="#" class="btn btn-ghost" data-demo="Ссылка на карточку в Яндекс Картах появится в рабочей версии">Все отзывы на Яндекс Картах</a>
+    </div>
+    <div class="rev-cards">
+      <article class="rev reveal">
+        <div class="stars">★★★★★</div>
+        <p>Приехали на выходные вдвоём и не хотели уезжать. Чан вечером под снегом — отдельная любовь, а в домике тепло и пахнет деревом.</p>
+        <footer><span>Анна, декабрь</span><span class="demo-chip">пример</span></footer>
+      </article>
+      <article class="rev reveal r2">
+        <div class="stars">★★★★★</div>
+        <p>Были с собакой, нам всё разрешили и даже дали лежанку. Вокруг лес, тишина, утром кофе на террасе. Вернёмся летом.</p>
+        <footer><span>Илья и Маша, октябрь</span><span class="demo-chip">пример</span></footer>
+      </article>
+      <article class="rev reveal r3">
+        <div class="stars">★★★★★</div>
+        <p>Отмечали день рождения компанией в Family House. Домик украсили к приезду, баня была уже натоплена. Сервис на высоте.</p>
+        <footer><span>Ольга, сентябрь</span><span class="demo-chip">пример</span></footer>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 8. АКЦИИ И СЕРТИФИКАТЫ ===================== -->
+<section class="sec" id="gifts" style="padding-top:0" data-offset="70">
+  <div class="wrap">
+    <div class="houses-head">
+      <div><span class="eyebrow reveal">Акции и подарки</span><h2 class="sec-title reveal r2" style="margin-top:14px">Повод приехать — уже сейчас</h2></div>
+      <p class="sec-sub reveal r3">Выгоднее в будни, приятнее с подарком. <span class="demo-chip">демо‑условия</span></p>
+    </div>
+    <div class="gifts-grid">
+      <div class="offers">
+        <div class="offer reveal"><b class="big">−20%</b><div><h3>Будни в лесу</h3><p>Заезд с воскресенья по четверг — скидка на проживание во всех домиках.</p></div></div>
+        <div class="offer reveal r2"><b class="big">−15%</b><div><h3>От трёх ночей</h3><p>Останьтесь подольше: при бронировании от 3 ночей скидка на весь заезд.</p></div></div>
+        <div class="offer reveal r3"><b class="big">0&nbsp;₽</b><div><h3>Чан именинникам</h3><p>За 5 дней до и после дня рождения горячий чан — в подарок.</p></div></div>
+        <div class="offer reveal r4"><b class="big">31.12</b><div><h3>Новый год в лесу</h3><p>Бронь новогодних ночей уже открыта. Ёлка в домике и праздничный завтрак включены.</p></div></div>
+      </div>
+      <div class="cert reveal r2">
+        <div class="cert-top"><span>Sylva Lodge</span><span>Подарочный сертификат</span></div>
+        <h3>Подарите выходные в&nbsp;лесу</h3>
+        <div class="cert-sum" id="certSum">10&nbsp;000&nbsp;₽</div>
+        <div class="chips" id="certChips">
+          <button class="chip" data-sum="5 000 ₽">5 000 ₽</button>
+          <button class="chip on" data-sum="10 000 ₽">10 000 ₽</button>
+          <button class="chip" data-sum="15 000 ₽">15 000 ₽</button>
+          <button class="chip" data-sum="Выходные в Grand">Выходные в Grand</button>
+        </div>
+        <p>Электронный — сразу на почту, или в деревянной коробке с доставкой по Екатеринбургу. Действует год.</p>
+        <button class="btn btn-accent" id="certBtn">Подарить сертификат</button>
       </div>
     </div>
   </div>
@@ -582,13 +900,34 @@ footer{margin-top:clamp(60px,8vw,100px);padding-top:24px;border-top:1px solid va
   <div class="wrap">
     <div class="sec-head">
       <h2 class="reveal">Четыре шага до&nbsp;выходных в&nbsp;лесу</h2>
-      <p class="reveal r2">Без сложных форм и предоплат на сайте — просто договоримся о датах.</p>
+      <p class="reveal r2">Онлайн за пару минут или через мессенджер — как вам удобнее.</p>
     </div>
     <div class="steps">
-      <div class="step reveal"><i>01</i><b>Оставляете заявку</b><span>Через форму ниже, звонком или в мессенджере</span></div>
-      <div class="step reveal r2"><i>02</i><b>Подбираем даты</b><span>Проверяем свободные дни и считаем стоимость</span></div>
-      <div class="step reveal r3"><i>03</i><b>Подтверждаем бронь</b><span>Закрепляем домик за вами и присылаем, как доехать</span></div>
+      <div class="step reveal"><i>01</i><b>Выбираете даты</b><span>В строке бронирования или пишете нам в мессенджер</span></div>
+      <div class="step reveal r2"><i>02</i><b>Выбираете домик</b><span>Сразу видно, что свободно и сколько это стоит</span></div>
+      <div class="step reveal r3"><i>03</i><b>Вносите предоплату 30%</b><span>Домик закреплён за вами, присылаем, как доехать</span></div>
       <div class="step reveal r4"><i>04</i><b>Приезжаете отдыхать</b><span>Баня натоплена, чан горячий, телефон можно убрать</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 10. ЧАСТЫЕ ВОПРОСЫ ===================== -->
+<section class="sec" id="faq" data-offset="80">
+  <div class="wrap faq-grid">
+    <div class="faq-side reveal">
+      <span class="eyebrow">Вопросы и ответы</span>
+      <h2 class="sec-title" style="margin-top:14px">Частые вопросы</h2>
+      <p>Не нашли ответ? Напишите нам — ответим за пару минут.</p>
+      <button class="btn btn-ghost" data-open-chat>Написать в мессенджер</button>
+    </div>
+    <div class="faq reveal r2">
+      <details open><summary>Во сколько заезд и выезд?</summary><p>Заезд с 15:00, выезд до 12:00. Ранний заезд и поздний выезд — по наличию, 1&nbsp;000&nbsp;₽ за час.</p></details>
+      <details><summary>Можно приехать с собакой?</summary><p>Да, в домики Pine и Grand. Доплата 1&nbsp;000&nbsp;₽ за сутки, миска и лежанка уже на месте. Просим выгуливать питомца на поводке по территории.</p></details>
+      <details><summary>Как отменить бронь?</summary><p>Предоплата 30%. При отмене за 7 дней и раньше вернём её полностью, позже — перенесём даты на любые свободные в течение полугода.</p></details>
+      <details><summary>Баня и чан входят в стоимость?</summary><p>Нет, они заказываются отдельно по прайсу. Лучше бронировать вместе с домиком, чтобы к приезду всё было натоплено.</p></details>
+      <details><summary>Есть ли связь и интернет?</summary><p>Мобильная связь ловит хорошо, в каждом домике Wi‑Fi. Но многие гости специально его не включают.</p></details>
+      <details><summary>Что взять с собой?</summary><p>Продукты и хорошее настроение. Бельё, полотенца, посуда, дрова, уголь и розжиг уже есть. Зимой — тёплую обувь для прогулок по лесу.</p></details>
+      <details><summary>Как добраться без машины?</summary><p>На такси от центра Екатеринбурга. Точный адрес и схему проезда пришлём сразу после бронирования.</p></details>
     </div>
   </div>
 </section>
@@ -612,6 +951,7 @@ footer{margin-top:clamp(60px,8vw,100px);padding-top:24px;border-top:1px solid va
             <input name="guests" placeholder="Сколько гостей">
           </div>
           <button class="btn btn-accent" type="submit">Отправить заявку</button>
+          <p class="consent">Нажимая кнопку, вы соглашаетесь на <a href="#" data-demo="Документ появится в рабочей версии сайта">обработку персональных данных</a>.</p>
         </form>
         <div class="ok">Спасибо! Скоро перезвоним,<br>чтобы подтвердить даты.</div>
       </div>
@@ -620,7 +960,7 @@ footer{margin-top:clamp(60px,8vw,100px);padding-top:24px;border-top:1px solid va
         <div class="c"><small>Где мы</small><div>Сосновый лес,<br>Екатеринбург</div></div>
         <div class="links">
           <a class="btn btn-ghost" href="#map" data-go>Смотреть на карте</a>
-          <a class="btn btn-ghost" href="#" target="_blank" rel="noopener">Telegram</a>
+          <button class="btn btn-ghost" data-open-chat>Написать в мессенджер</button>
         </div>
       </div>
     </div>
@@ -637,11 +977,53 @@ footer{margin-top:clamp(60px,8vw,100px);padding-top:24px;border-top:1px solid va
       </div>
     </div>
     <footer>
-      <span>© 2026 Sylva Lodge · глэмпинг в Екатеринбурге</span>
+      <span>© 2026 Sylva Lodge · глэмпинг в Екатеринбурге · демо‑сайт, фото Unsplash</span>
+      <nav class="legal">
+        <a href="#" data-demo="Документ появится в рабочей версии сайта">Политика конфиденциальности</a>
+        <a href="#" data-demo="Документ появится в рабочей версии сайта">Договор‑оферта</a>
+        <a href="#" data-demo="Документ появится в рабочей версии сайта">Согласие на обработку данных</a>
+      </nav>
       <a href="#top" data-go>Наверх ↑</a>
     </footer>
   </div>
 </section>
+
+<!-- ===================== Плавающая кнопка мессенджеров ===================== -->
+<div class="chat" id="chat">
+  <div class="chat-list">
+    <a href="#" data-demo="В демо‑версии чат не подключён: здесь откроется WhatsApp"><i style="background:#25d366">WA</i>WhatsApp</a>
+    <a href="#" data-demo="В демо‑версии чат не подключён: здесь откроется Telegram"><i style="background:#2aabee">TG</i>Telegram</a>
+    <a href="#" data-demo="В демо‑версии чат не подключён: здесь откроется MAX"><i style="background:#7b5cff">M</i>MAX</a>
+    <a href="tel:+73430000000"><i style="background:var(--accent)">☎</i>Позвонить</a>
+  </div>
+  <button class="chat-btn" id="chatBtn" aria-label="Написать нам">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 18.5V6.8A2.8 2.8 0 0 1 6.8 4h10.4A2.8 2.8 0 0 1 20 6.8v6.4a2.8 2.8 0 0 1-2.8 2.8H8.5Z"/><path d="M8.5 9.5h7M8.5 12.5h4.5"/></svg>
+  </button>
+</div>
+
+<!-- ===================== Окно заявки (бронь / сертификат / праздник) ===================== -->
+<div class="modal" id="modal" aria-hidden="true">
+  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="mTitle">
+    <button class="modal-x" id="mClose" aria-label="Закрыть">×</button>
+    <form id="mForm">
+      <h3 id="mTitle">Бронирование</h3>
+      <div class="modal-sum" id="mSum"></div>
+      <div class="mfield"><input name="name" placeholder="Ваше имя" required autocomplete="name"></div>
+      <div class="mfield"><input name="phone" type="tel" placeholder="Телефон" required autocomplete="tel"></div>
+      <div class="mfield"><textarea name="comment" placeholder="Пожелания: баня, чан, завтрак, праздник…"></textarea></div>
+      <button class="btn btn-accent" type="submit">Отправить заявку</button>
+      <p class="consent">Нажимая кнопку, вы соглашаетесь на <a href="#" data-demo="Документ появится в рабочей версии сайта">обработку персональных данных</a>. Это демо: заявка никуда не отправляется.</p>
+    </form>
+    <div class="modal-ok"><b>Заявка принята!</b><span class="muted">Администратор свяжется с вами в течение 15 минут, чтобы подтвердить детали.</span></div>
+  </div>
+</div>
+
+<!-- ===================== Cookies и уведомления ===================== -->
+<div class="cookie glass" id="cookie">
+  <span>Мы используем cookies, чтобы сайт работал удобнее. Продолжая, вы соглашаетесь с <a href="#" data-demo="Документ появится в рабочей версии сайта">политикой конфиденциальности</a>.</span>
+  <button class="btn btn-light" id="cookieOk">Понятно</button>
+</div>
+<div class="toast" id="toast"></div>
 
 <script>
 (function(){
@@ -781,6 +1163,88 @@ footer{margin-top:clamp(60px,8vw,100px);padding-top:24px;border-top:1px solid va
 
   // форма (демо)
   document.querySelector('#form form').addEventListener('submit',e=>{e.preventDefault();document.getElementById('form').classList.add('sent')});
+
+  // ===== Уведомление для ссылок, которые в демо не подключены =====
+  const toastEl=document.getElementById('toast');let toastT;
+  function toast(msg){toastEl.textContent=msg;toastEl.classList.add('show');clearTimeout(toastT);toastT=setTimeout(()=>toastEl.classList.remove('show'),2800)}
+  document.addEventListener('click',e=>{const a=e.target.closest('[data-demo]');if(a){e.preventDefault();toast(a.dataset.demo)}});
+
+  // ===== Плавающая кнопка мессенджеров =====
+  const chat=document.getElementById('chat');
+  document.getElementById('chatBtn').addEventListener('click',()=>chat.classList.toggle('open'));
+  document.querySelectorAll('[data-open-chat]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();chat.classList.add('open')}));
+  document.addEventListener('click',e=>{if(!chat.contains(e.target))chat.classList.remove('open')});
+
+  // ===== Демо-модуль бронирования: свободные домики и расчёт стоимости =====
+  const HOUSES={pine:{name:'Pine',cap:2,wd:5000,we:6500},grand:{name:'Grand',cap:4,wd:7500,we:9500},family:{name:'Family House',cap:6,wd:11000,we:14000}};
+  const rub=n=>n.toLocaleString('ru-RU')+' ₽';
+  const iso=d=>new Date(d.getTime()-d.getTimezoneOffset()*60000).toISOString().slice(0,10);
+  const parse=s=>{const [y,m,d]=s.split('-').map(Number);return new Date(y,m-1,d)};
+  const fmt=d=>d.toLocaleDateString('ru-RU',{day:'numeric',month:'long'});
+  const plural=(n,a,b,c)=>{const m=n%10,h=n%100;return n+' '+(m===1&&h!==11?a:(m>=2&&m<=4&&(h<10||h>=20))?b:c)};
+  const bkIn=document.getElementById('bkIn'),bkOut=document.getElementById('bkOut'),bkG=document.getElementById('bkG'),bkErr=document.getElementById('bkErr');
+  (function(){ // по умолчанию — ближайшие выходные: пятница → воскресенье
+    const t=new Date();t.setHours(0,0,0,0);
+    const fri=new Date(t);fri.setDate(t.getDate()+(((5-t.getDay()+7)%7)||7));
+    const sun=new Date(fri);sun.setDate(fri.getDate()+2);
+    bkIn.min=iso(t);bkIn.value=iso(fri);bkOut.value=iso(sun);
+    const tm=new Date(t);tm.setDate(t.getDate()+1);bkOut.min=iso(tm);
+  })();
+  bkIn.addEventListener('change',()=>{if(!bkIn.value)return;const d=parse(bkIn.value);d.setDate(d.getDate()+1);bkOut.min=iso(d);if(!bkOut.value||parse(bkOut.value)<=parse(bkIn.value))bkOut.value=iso(d)});
+  // ночи пт и сб считаются по цене выходных
+  function cost(h,a,b){let s=0,n=0;for(const d=new Date(a);d<b;d.setDate(d.getDate()+1)){s+=(d.getDay()===5||d.getDay()===6)?h.we:h.wd;n++}return{s,n}}
+  // «занятость» в демо — псевдослучайная, но одинаковая для одних и тех же дат
+  function isBusy(id,a){let x=7;for(const c of id+iso(a))x=(x*31+c.charCodeAt(0))%9973;return x%4===0}
+  let search=null;
+  document.getElementById('bk').addEventListener('submit',e=>{
+    e.preventDefault();
+    if(!bkIn.value||!bkOut.value||parse(bkOut.value)<=parse(bkIn.value)){bkErr.style.display='block';return}
+    bkErr.style.display='none';
+    const a=parse(bkIn.value),b=parse(bkOut.value),g=+bkG.value;search={a,b,g};
+    const st={};Object.keys(HOUSES).forEach(id=>st[id]={fits:g<=HOUSES[id].cap,busy:isBusy(id,a)});
+    const fitIds=Object.keys(st).filter(id=>st[id].fits);
+    if(fitIds.length&&fitIds.every(id=>st[id].busy))st[fitIds[fitIds.length-1]].busy=false; // хотя бы один вариант свободен
+    let free=0;
+    Object.entries(HOUSES).forEach(([id,h])=>{
+      const card=document.querySelector('.house[data-house="'+id+'"]'),badge=card.querySelector('.house-badge'),tot=card.querySelector('.house-total'),btn=card.querySelector('[data-book]');
+      const ok=st[id].fits&&!st[id].busy;
+      card.classList.toggle('busy',!ok);card.classList.toggle('free',ok);badge.classList.toggle('ok',ok);btn.disabled=!ok;
+      if(!st[id].fits){badge.textContent='Вмещает до '+h.cap+' гостей';tot.textContent=''}
+      else if(st[id].busy){badge.textContent='Занято на эти даты';tot.textContent=''}
+      else{free++;const c=cost(h,a,b);badge.textContent='Свободно';tot.textContent='Итого за '+plural(c.n,'ночь','ночи','ночей')+': '+rub(c.s)}
+    });
+    const n=Math.round((b-a)/864e5);
+    document.getElementById('houseRes').innerHTML='<b>'+fmt(a)+' — '+fmt(b)+'</b> · '+plural(n,'ночь','ночи','ночей')+' · '+plural(g,'гость','гостя','гостей')+': свободно <b>'+free+' из 3</b> домиков'+(free?'':'. Попробуйте другие даты или напишите нам — подберём вариант');
+    const t=document.getElementById('price');smoothScrollTo(t.getBoundingClientRect().top+window.scrollY-70);
+  });
+
+  // ===== Окно заявки: бронь, сертификат, праздник =====
+  const modal=document.getElementById('modal'),mTitle=document.getElementById('mTitle'),mSum=document.getElementById('mSum'),mForm=document.getElementById('mForm');
+  function openModal(title,sum){mTitle.textContent=title;mSum.innerHTML=sum;mForm.reset();modal.classList.remove('sent');modal.classList.add('open');modal.setAttribute('aria-hidden','false');body.classList.add('locked');setTimeout(()=>mForm.elements['name'].focus(),350)}
+  function closeModal(){modal.classList.remove('open');modal.setAttribute('aria-hidden','true');body.classList.remove('locked')}
+  document.getElementById('mClose').addEventListener('click',closeModal);
+  modal.addEventListener('click',e=>{if(e.target===modal)closeModal()});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&modal.classList.contains('open'))closeModal()});
+  mForm.addEventListener('submit',e=>{e.preventDefault();modal.classList.add('sent')});
+  document.querySelectorAll('[data-book]').forEach(btn=>btn.addEventListener('click',()=>{
+    const h=HOUSES[btn.dataset.book];let s='Домик: <b>'+h.name+'</b> · до '+h.cap+' гостей';
+    if(search){const c=cost(h,search.a,search.b);s+='<br>Даты: <b>'+fmt(search.a)+' — '+fmt(search.b)+'</b> ('+plural(c.n,'ночь','ночи','ночей')+')<br>Гостей: '+search.g+'<br>Стоимость: <b>'+rub(c.s)+'</b>, предоплата 30% — '+rub(Math.round(c.s*.3))}
+    else s+='<br>Цена: '+rub(h.wd)+' в будни, '+rub(h.we)+' в пт–сб. Даты уточним с вами.';
+    openModal('Бронирование домика',s);
+  }));
+  let certSum='10 000 ₽';
+  document.querySelectorAll('#certChips .chip').forEach(c=>c.addEventListener('click',()=>{
+    document.querySelectorAll('#certChips .chip').forEach(x=>x.classList.toggle('on',x===c));
+    certSum=c.dataset.sum;document.getElementById('certSum').textContent=certSum;
+  }));
+  document.getElementById('certBtn').addEventListener('click',()=>openModal('Подарочный сертификат','Номинал: <b>'+certSum+'</b><br>Электронный или в деревянной коробке — уточним при звонке.'));
+  document.querySelectorAll('[data-event]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();openModal('Подготовим праздник','Повод: <b>'+a.dataset.event+'</b><br>Расскажите о датах и пожеланиях — предложим оформление и сценарий.')}));
+
+  // ===== Плашка cookies =====
+  const cookie=document.getElementById('cookie');let cookieOk=false;
+  try{cookieOk=localStorage.getItem('sylvaCookie')==='1'}catch(e){}
+  if(!cookieOk)setTimeout(()=>cookie.classList.add('show'),3800);
+  document.getElementById('cookieOk').addEventListener('click',()=>{cookie.classList.remove('show');try{localStorage.setItem('sylvaCookie','1')}catch(e){}});
 })();
 </script>
 </body>
