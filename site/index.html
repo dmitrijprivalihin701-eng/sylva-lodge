@@ -5,6 +5,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Sylva Lodge — домик в лесу, баня и чан под Екатеринбургом</title>
 <meta name="description" content="Глэмпинг Sylva Lodge: домик A-frame с панорамным окном в сосны, баня и горячий чан. Екатеринбург, от 5 000 ₽ в сутки.">
+<!-- Превью ссылки в Telegram, WhatsApp, VK -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Sylva Lodge">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:title" content="Sylva Lodge — домики A‑frame в сосновом лесу">
+<meta property="og:description" content="Баня, горячий чан и тишина под Екатеринбургом. Онлайн‑бронь за 2 минуты, от 5 000 ₽ в сутки.">
+<meta property="og:url" content="https://dmitrijprivalihin701-eng.github.io/sylva-lodge/site/">
+<meta property="og:image" content="https://dmitrijprivalihin701-eng.github.io/sylva-lodge/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Sylva Lodge: сайт глэмпинга на ноутбуке и телефоне">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://dmitrijprivalihin701-eng.github.io/sylva-lodge/og-image.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%230e0f0d'/%3E%3Cpath d='M12 4 L19 19 H5 Z' fill='none' stroke='%23eba35f' stroke-width='1.6'/%3E%3Cpath d='M12 11 L15 17 H9 Z' fill='%23d4782f'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500&family=Manrope:wght@400;500;600&family=Oswald:wght@300;400&display=swap" rel="stylesheet">
@@ -494,8 +508,8 @@ footer{margin-top:clamp(60px,8vw,100px);padding-top:24px;border-top:1px solid va
 .chat-list a:hover{border-color:var(--accent2)}
 
 /* Cookies и уведомления */
-.cookie{position:fixed;left:20px;bottom:20px;z-index:69;max-width:420px;padding:16px 18px;display:flex;gap:14px;align-items:center;font-size:13px;color:var(--muted);transform:translateY(160%);transition:transform .5s var(--ease)}
-.cookie.show{transform:none}
+.cookie{position:fixed;left:20px;bottom:20px;z-index:69;max-width:420px;padding:16px 18px;display:flex;gap:14px;align-items:center;font-size:13px;color:var(--muted);transform:translateY(calc(100% + 140px));visibility:hidden;transition:transform .5s var(--ease),visibility .5s}
+.cookie.show{transform:none;visibility:visible}
 .cookie a{color:var(--text);text-decoration:underline}
 .cookie .btn{padding:10px 16px;flex:none}
 .toast{position:fixed;left:50%;bottom:96px;z-index:99;transform:translate(-50%,20px);opacity:0;padding:12px 18px;border-radius:12px;background:#24251f;border:1px solid var(--line2);font-size:14px;transition:.35s var(--ease);pointer-events:none;max-width:calc(100% - 32px);text-align:center}
@@ -1088,8 +1102,13 @@ footer{margin-top:clamp(60px,8vw,100px);padding-top:24px;border-top:1px solid va
   }
 
   // первый запуск
-  window.addEventListener('load',()=>{runLoader(2600,null,()=>{body.classList.add('ready')})});
-  setTimeout(()=>{if(!body.classList.contains('ready')&&!busy){runLoader(1200,null,()=>body.classList.add('ready'))}},6000);
+  // ?shot — служебный режим для скриншотов превью: без прелоадера и плашки cookies
+  const SHOT=/[?&]shot\b/.test(location.search);
+  if(SHOT){loader.classList.add('hide');body.classList.remove('locked');body.classList.add('ready')}
+  else{
+    window.addEventListener('load',()=>{runLoader(2600,null,()=>{body.classList.add('ready')})});
+    setTimeout(()=>{if(!body.classList.contains('ready')&&!busy){runLoader(1200,null,()=>body.classList.add('ready'))}},6000);
+  }
 
   // переходы по ссылкам — плавная прокрутка (прелоадер только при первом открытии сайта)
   let scrollAnim=null;
@@ -1323,7 +1342,7 @@ footer{margin-top:clamp(60px,8vw,100px);padding-top:24px;border-top:1px solid va
   // ===== Плашка cookies =====
   const cookie=document.getElementById('cookie');let cookieOk=false;
   try{cookieOk=localStorage.getItem('sylvaCookie')==='1'}catch(e){}
-  if(!cookieOk)setTimeout(()=>cookie.classList.add('show'),3800);
+  if(!cookieOk&&!SHOT)setTimeout(()=>cookie.classList.add('show'),3800);
   document.getElementById('cookieOk').addEventListener('click',()=>{cookie.classList.remove('show');try{localStorage.setItem('sylvaCookie','1')}catch(e){}});
 })();
 </script>
