@@ -21,6 +21,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%230e0f0d'/%3E%3Cpath d='M12 4 L19 19 H5 Z' fill='none' stroke='%23eba35f' stroke-width='1.6'/%3E%3Cpath d='M12 11 L15 17 H9 Z' fill='%23d4782f'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="image" href="img/hero.jpg" fetchpriority="high">
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500&family=Manrope:wght@400;500;600&family=Oswald:wght@300;400&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -48,7 +49,9 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 
 /* ===================== ПРЕЛОАДЕР ===================== */
 #loader{position:fixed;inset:0;z-index:100;background:radial-gradient(ellipse at 50% 60%,#1d1b16 0%,#0b0c0a 70%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;opacity:1;visibility:visible;transition:opacity .45s var(--ease),visibility .45s}
-#loader.hide{opacity:0;visibility:hidden}
+#loader.hide{opacity:0;visibility:hidden;transition-delay:.12s}
+#loader>*{transition:opacity .2s}
+#loader.hide>*{opacity:0}
 #loader .stars i{position:absolute;width:2px;height:2px;border-radius:50%;background:#fff;opacity:0;animation:twinkle 2.4s infinite}
 @keyframes twinkle{0%,100%{opacity:0}50%{opacity:.8}}
 .ld-house{width:min(220px,52vw);overflow:visible}
@@ -1082,6 +1085,7 @@ footer{margin-top:clamp(60px,8vw,100px);padding-top:24px;border-top:1px solid va
   // Прелоадер «Загружаем ваш уют»
   let busy=false;
   function runLoader(duration,onMiddle,onDone){
+    if(busy)return; // защита от двойного запуска (раньше на медленном интернете прелоадер запускался дважды и текст накладывался)
     busy=true;
     loader.classList.remove('run');void loader.offsetWidth;loader.classList.add('run');
     loader.classList.remove('hide');body.classList.add('locked');
@@ -1097,20 +1101,27 @@ footer{margin-top:clamp(60px,8vw,100px);padding-top:24px;border-top:1px solid va
       drawHouse(e);
       if(t-lastSwap>duration/3.2&&p<.95){pi=(pi+1)%phrases.length;status.style.opacity=0;setTimeout(()=>{status.textContent=phrases[pi];status.style.opacity=1},200);lastSwap=t}
       if(!middleDone&&p>.5){middleDone=true;onMiddle&&onMiddle()}
-      if(p<1)requestAnimationFrame(tick);
-      else setTimeout(()=>{loader.classList.add('hide');body.classList.remove('locked');busy=false;onDone&&onDone()},450);
+      if(p<1)requestAnimationFrame(tick);else finish();
+    }
+    let finished=false;
+    function finish(){
+      if(finished)return;finished=true;
+      bar.style.transform='scaleX(1)';pct.textContent='100%';drawHouse(1);
+      setTimeout(()=>{
+        loader.classList.add('hide'); // сначала гаснет текст прелоадера, затем фон
+        body.classList.remove('locked');busy=false;
+        setTimeout(()=>{onDone&&onDone()},420); // главный экран оживает, когда прелоадер уже ушёл — без наложения текста
+      },450);
     }
     requestAnimationFrame(tick);
+    setTimeout(finish,duration+1200); // если кадры не идут (вкладка в фоне), прелоадер всё равно завершится
   }
 
   // первый запуск
   // ?shot — служебный режим для скриншотов превью: без прелоадера и плашки cookies
   const SHOT=/[?&]shot\b/.test(location.search);
   if(SHOT){loader.classList.add('hide');body.classList.remove('locked');body.classList.add('ready')}
-  else{
-    window.addEventListener('load',()=>{runLoader(2600,null,()=>{body.classList.add('ready')})});
-    setTimeout(()=>{if(!body.classList.contains('ready')&&!busy){runLoader(1200,null,()=>body.classList.add('ready'))}},6000);
-  }
+  else runLoader(2600,null,()=>{body.classList.add('ready');showCookie()}); // сразу, не дожидаясь загрузки всех картинок
 
   // переходы по ссылкам — плавная прокрутка (прелоадер только при первом открытии сайта)
   let scrollAnim=null;
@@ -1344,8 +1355,10 @@ footer{margin-top:clamp(60px,8vw,100px);padding-top:24px;border-top:1px solid va
   // ===== Плашка cookies =====
   const cookie=document.getElementById('cookie');let cookieOk=false;
   try{cookieOk=localStorage.getItem('sylvaCookie')==='1'}catch(e){}
-  if(!cookieOk&&!SHOT)setTimeout(()=>cookie.classList.add('show'),3800);
-  document.getElementById('cookieOk').addEventListener('click',()=>{cookie.classList.remove('show');try{localStorage.setItem('sylvaCookie','1')}catch(e){}});
+  // показываем только после прелоадера, чтобы плашка не пряталась под ним
+  function showCookie(){if(!cookieOk&&!SHOT)setTimeout(()=>{if(!cookieOk)cookie.classList.add('show')},1500)}
+  function hideCookie(e){if(e)e.preventDefault();cookieOk=true;cookie.classList.remove('show');try{localStorage.setItem('sylvaCookie','1')}catch(err){}}
+  document.getElementById('cookieOk').addEventListener('click',hideCookie);
 })();
 </script>
 </body>
