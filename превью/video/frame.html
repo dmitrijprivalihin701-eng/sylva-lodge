@@ -1,0 +1,19 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<!-- Рамка телефона с прозрачным экраном (рендер с прозрачным фоном). Экран: x=190 y=300 700×1515, радиус 62 -->
+<style>
+*{margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:transparent}
+.hole{position:absolute;left:190px;top:300px;width:700px;height:1515px;border-radius:62px;
+  box-shadow:0 0 0 22px #0b0b0a,0 0 0 24px rgba(255,255,255,.22),0 50px 90px 10px rgba(0,0,0,.55)}
+.notch{position:absolute;left:50%;top:318px;width:150px;height:40px;margin-left:-75px;border-radius:22px;background:#0b0b0a}
+.btn{position:absolute;width:6px;border-radius:3px;background:#2a2b27}
+</style></head><body>
+<div class="hole"></div>
+<!-- закрывает прямые углы видео, чтобы экран был скруглённым -->
+<svg style="position:absolute;left:190px;top:300px" width="700" height="1515"><path fill="#0b0b0a" fill-rule="evenodd" d="M0 0H700V1515H0Z M62 0H638A62 62 0 0 1 700 62V1453A62 62 0 0 1 638 1515H62A62 62 0 0 1 0 1453V62A62 62 0 0 1 62 0Z"/></svg>
+<div class="notch"></div>
+<div class="btn" style="left:162px;top:560px;height:90px"></div>
+<div class="btn" style="left:162px;top:670px;height:90px"></div>
+<div class="btn" style="left:912px;top:620px;height:140px"></div>
+</body></html>

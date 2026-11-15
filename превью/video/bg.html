@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8">
+<!-- Фон ролика 1080×1920: экран телефона встаёт в прямоугольник x=190 y=300 700×1515 -->
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400&family=Manrope:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#0e0f0d;color:#f2eee8;font-family:'Manrope',sans-serif;text-align:center}
+.bg{position:absolute;inset:-40px;background:url(http://localhost:8765/img/hero.jpg) 45% 50%/cover;filter:blur(14px) brightness(.32) saturate(.8)}
+.shade{position:absolute;inset:0;background:radial-gradient(circle at 50% 55%,rgba(212,120,47,.28),transparent 50%),linear-gradient(180deg,rgba(14,15,13,.7),rgba(14,15,13,.2) 30%,rgba(14,15,13,.6))}
+.logo{position:absolute;top:84px;left:0;right:0;display:flex;justify-content:center;align-items:center;gap:14px;font-family:'Jost';font-weight:300;font-size:58px;letter-spacing:.18em}
+.logo svg{width:50px;height:50px}
+.sub{position:absolute;top:172px;left:0;right:0;font-size:24px;letter-spacing:.3em;text-transform:uppercase;color:#eba35f}
+.foot{position:absolute;bottom:34px;left:0;right:0;font-size:22px;letter-spacing:.2em;text-transform:uppercase;color:#9a958c}
+</style></head><body>
+<div class="bg"></div><div class="shade"></div>
+<div class="logo"><svg viewBox="0 0 24 24" fill="none" stroke="#eba35f" stroke-width="1.2"><path d="M12 2 L21 21 H3 Z"/><path d="M12 10 L16 18 H8 Z"/></svg>SYLVA LODGE</div>
+<div class="sub">сайт глэмпинга · демо</div>
+<div class="foot">онлайн‑бронь · домики · сертификаты</div>
+</body></html>
