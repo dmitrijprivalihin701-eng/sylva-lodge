@@ -2,7 +2,7 @@
    Страница: сначала сеть (чтобы правки сайта сразу были видны), без сети — из кэша.
    Картинки, шрифты, иконки: из кэша (быстрая повторная загрузка), обновляются в фоне.
    При изменении сайта поднимите VERSION, чтобы сбросить старый кэш. */
-const VERSION = 'sylva-v1';
+const VERSION = 'sylva-v2';
 const CORE = ['./', './index.html', './manifest.webmanifest', './img/icon-192.png', './img/icon-512.png', './img/hero-m.jpg', './img/hero.jpg'];
 
 self.addEventListener('install', e => {

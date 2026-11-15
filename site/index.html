@@ -1251,7 +1251,7 @@ footer .install-btn{color:var(--accent2)}
   // форма (демо)
   // ===== Отправка заявок =====
   // Адрес веб-приложения Google Apps Script (см. папку «заявки» и инструкцию). Пусто — демо-режим: заявки никуда не уходят.
-  const LEADS_URL='';
+  const LEADS_URL='https://script.google.com/macros/s/AKfycbyEH_VFxp22h3KkmmwfbwuXSskU1Su3Q_paZKuRxxz2O4G5V8XZHZfjmUSWLJVeabw7/exec';
   if(LEADS_URL)document.querySelectorAll('.demo-note').forEach(n=>n.remove());
   // Заявка уходит в Google-таблицу, оттуда скрипт присылает уведомление в Telegram администраторам.
   // Тип text/plain — чтобы браузер не делал предварительный CORS-запрос, который Apps Script не поддерживает.
