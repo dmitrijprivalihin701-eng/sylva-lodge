@@ -396,14 +396,32 @@ footer{margin-top:clamp(60px,8vw,100px);padding-top:24px;border-top:1px solid va
 .extras-list li span:last-child{white-space:nowrap;color:var(--accent2);font-family:var(--display);font-size:17px}
 .extras-list li small{display:block;font-size:12px;color:var(--muted)}
 
-/* Сценарии «для кого» */
-.for-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(12px,1.6vw,20px);margin-top:40px}
-.for-card{position:relative;padding:26px 24px;border:1px solid var(--line);border-radius:20px;background:linear-gradient(160deg,rgba(255,255,255,.03),transparent);transition:border-color .3s,background .3s}
-.for-card:hover{border-color:rgba(212,120,47,.5);background:linear-gradient(160deg,rgba(212,120,47,.08),transparent)}
-.for-card svg{width:30px;height:30px;color:var(--accent2);margin-bottom:18px}
-.for-card h3{font-family:var(--display);font-weight:400;font-size:21px;margin-bottom:8px}
-.for-card p{font-size:14px;color:var(--muted)}
-.for-card .link{display:inline-block;margin-top:14px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent2);border-bottom:1px solid rgba(235,163,95,.4);padding-bottom:2px}
+/* Сценарии «для кого»: 3D-карусель по дуге (как вид изнутри цилиндра) */
+.car{position:relative;height:var(--ch,520px);margin-top:36px;perspective:1300px;perspective-origin:50% 45%;touch-action:pan-y;user-select:none;outline:none}
+.car-stage{position:absolute;inset:0;transform-style:preserve-3d}
+.car-item{position:absolute;left:50%;top:50%;width:var(--w,300px);height:var(--h,420px);margin:calc(var(--h,420px) / -2) 0 0 calc(var(--w,300px) / -2);border-radius:18px;overflow:hidden;cursor:pointer;
+  transition:transform 1s var(--ease),opacity .7s,filter 1s;filter:brightness(.5) saturate(.75);box-shadow:0 40px 70px -20px rgba(0,0,0,.8);backface-visibility:hidden}
+.car-item.active{filter:none;cursor:default}
+.car-img{position:absolute;inset:0 -20%;background-size:cover;background-position:center;transition:transform 1s var(--ease)}
+.car-item::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 30%,rgba(10,10,8,.62) 58%,rgba(10,10,8,.94) 100%);pointer-events:none}
+.car-item figcaption{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:20px 20px 22px;opacity:0;transform:translateY(14px);transition:opacity .6s .25s,transform .6s .25s var(--ease);pointer-events:none}
+.car-item.active figcaption{opacity:1;transform:none;pointer-events:auto}
+.car-n{display:block;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent2);margin-bottom:6px}
+.car-item b{display:block;font-family:var(--display);font-weight:300;font-size:clamp(22px,2vw,28px);line-height:1.1;margin-bottom:6px}
+.car-item p{font-size:13px;line-height:1.5;color:rgba(242,238,232,.8)}
+.car-item .link{display:inline-block;margin-top:10px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent2);border-bottom:1px solid rgba(235,163,95,.4);padding-bottom:2px}
+.car-arrow{position:absolute;top:50%;z-index:5;width:52px;height:52px;margin-top:-26px;border-radius:50%;border:1px solid var(--line2);background:rgba(14,15,13,.55);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);font-size:24px;line-height:1;transition:border-color .2s,background .2s}
+.car-arrow:hover{border-color:var(--accent2);background:rgba(212,120,47,.15)}
+.car-prev{left:0}.car-next{right:0}
+.car-tabs{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;margin-top:22px}
+.car-tab{position:relative;overflow:hidden;padding:9px 16px;border-radius:999px;border:1px solid var(--line);font-size:13px;color:var(--muted);transition:color .3s,border-color .3s}
+.car-tab:hover{color:var(--text)}
+.car-tab.on{color:var(--text);border-color:rgba(235,163,95,.6)}
+.car-tab i{position:absolute;left:0;bottom:0;height:2px;width:0;background:var(--accent2)}
+.car-tab.on i{animation:carbar var(--dur,4.5s) linear forwards}
+.car.paused~.car-tabs .car-tab.on i,.car-tabs.paused .car-tab.on i{animation-play-state:paused}
+@keyframes carbar{to{width:100%}}
+@media (max-width:640px){.car-arrow{width:44px;height:44px;margin-top:-22px}.car-tab{padding:8px 12px;font-size:12px}}
 
 /* Отзывы */
 .rev-grid{display:grid;grid-template-columns:.8fr 2.2fr;gap:clamp(20px,3vw,40px);align-items:start}
@@ -495,7 +513,6 @@ footer{margin-top:clamp(60px,8vw,100px);padding-top:24px;border-top:1px solid va
   .bk{grid-template-columns:1fr 1fr}
   .bk .btn{grid-column:1/-1}
   .houses{grid-template-columns:1fr}
-  .for-grid{grid-template-columns:1fr 1fr}
   .rev-cards{grid-template-columns:1fr}
   .gifts-grid{grid-template-columns:1fr}
   .faq-grid{grid-template-columns:1fr}
@@ -503,7 +520,6 @@ footer{margin-top:clamp(60px,8vw,100px);padding-top:24px;border-top:1px solid va
   .extras-list{grid-template-columns:1fr}
 }
 @media (max-width:640px){
-  .for-grid{grid-template-columns:1fr}
   .offer b.big{font-size:32px;min-width:76px}
   .chat{right:16px;bottom:16px}
   .cookie{left:16px;right:16px;bottom:88px;max-width:none}
@@ -803,33 +819,32 @@ footer{margin-top:clamp(60px,8vw,100px);padding-top:24px;border-top:1px solid va
       <div><span class="eyebrow reveal">Для кого</span><h2 class="sec-title reveal r2" style="margin-top:14px">Каждый находит здесь своё</h2></div>
       <p class="sec-sub reveal r3">Расскажите, какой отдых вы хотите, а мы подготовим домик заранее.</p>
     </div>
-    <div class="for-grid">
-      <div class="for-card reveal">
-        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M16 27s-10-6.2-10-13.2A5.6 5.6 0 0 1 16 10.6a5.6 5.6 0 0 1 10 3.2C26 20.8 16 27 16 27Z"/></svg>
-        <h3>Вдвоём</h3><p>Тишина, чан под звёздами, завтрак в домик и никаких соседей за стенкой.</p>
+    <!-- 3D-карусель сценариев: крутится сама, клик по фото — пролистывает к нему -->
+    <div class="car reveal" id="car" tabindex="0" aria-roledescription="карусель" aria-label="Какой отдых вы хотите">
+      <div class="car-stage" id="carStage">
+        <figure class="car-item" data-i="0"><div class="car-img" style="background-image:url(img/for-couple.jpg)"></div>
+          <figcaption><span class="car-n">01 · для двоих</span><b>Вдвоём</b><p>Тишина, чан под звёздами, завтрак в домик и никаких соседей за стенкой.</p></figcaption></figure>
+        <figure class="car-item" data-i="1"><div class="car-img" style="background-image:url(img/for-family.jpg)"></div>
+          <figcaption><span class="car-n">02 · Family House</span><b>Семьёй с детьми</b><p>Дом на 6 гостей, детская кроватка и посуда, безопасная территория и костёр с зефиром.</p></figcaption></figure>
+        <figure class="car-item" data-i="2"><div class="car-img" style="background-image:url(img/for-friends.jpg)"></div>
+          <figcaption><span class="car-n">03 · до 6 гостей</span><b>Компанией друзей</b><p>Баня, мангал, настолки и проектор. Большой дом, где хватит места всем.</p></figcaption></figure>
+        <figure class="car-item" data-i="3"><div class="car-img" style="background-image:url(img/for-dog.jpg)"></div>
+          <figcaption><span class="car-n">04 · dog friendly</span><b>С собакой</b><p>Домики Pine и Grand: миска и лежанка уже ждут, вокруг лес для долгих прогулок.</p></figcaption></figure>
+        <figure class="car-item" data-i="4"><div class="car-img" style="background-image:url(img/for-birthday.jpg)"></div>
+          <figcaption><span class="car-n">05 · праздник</span><b>День рождения и девичник</b><p>Шары, гирлянды, торт и чан с лепестками — оформим домик к приезду.</p><a href="#" class="link" data-event="День рождения / девичник">Подготовить праздник →</a></figcaption></figure>
+        <figure class="car-item" data-i="5"><div class="car-img" style="background-image:url(img/for-proposal.jpg)"></div>
+          <figcaption><span class="car-n">06 · сюрприз</span><b>Предложение руки и сердца</b><p>Свечи, лепестки, фотограф и тишина. Поможем, чтобы ответом было «да».</p><a href="#" class="link" data-event="Предложение руки и сердца">Подготовить сюрприз →</a></figcaption></figure>
       </div>
-      <div class="for-card reveal r2">
-        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="11" cy="9" r="3.5"/><circle cx="22" cy="11" r="2.5"/><path d="M4 26c0-4.4 3.1-8 7-8s7 3.6 7 8M17 26c0-3.3 2.2-6 5-6s5 2.7 5 6"/></svg>
-        <h3>Семьёй с детьми</h3><p>Family House на 6 гостей, детская кроватка и посуда, безопасная территория и костёр с зефиром.</p>
-      </div>
-      <div class="for-card reveal r3">
-        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 25 16 6l10 19Z"/><path d="M12 25l4-7 4 7"/></svg>
-        <h3>Компанией друзей</h3><p>Баня, мангал, настолки и проектор. Большой дом, где хватит места всем.</p>
-      </div>
-      <div class="for-card reveal">
-        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="9" cy="12" r="2.4"/><circle cx="16" cy="8.5" r="2.4"/><circle cx="23" cy="12" r="2.4"/><path d="M16 15c-4 0-7.5 4.5-7.5 8 0 2 1.6 3 3.4 3 1.6 0 2.6-.8 4.1-.8s2.5.8 4.1.8c1.8 0 3.4-1 3.4-3 0-3.5-3.5-8-7.5-8Z"/></svg>
-        <h3>С собакой</h3><p>Домики Pine и Grand — dog friendly. Миска и лежанка уже ждут, вокруг лес для долгих прогулок.</p>
-      </div>
-      <div class="for-card reveal r2">
-        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 27h20M8 27V16h16v11M8 20c2.7 0 2.7 2 5.3 2s2.7-2 5.4-2 2.6 2 5.3 2M16 16v-4M16 12c-1.2-1.2-1.2-3 0-5 1.2 2 1.2 3.8 0 5Z"/></svg>
-        <h3>День рождения и девичник</h3><p>Шары, гирлянды, торт и чан с лепестками — оформим домик к вашему приезду.</p>
-        <a href="#" class="link" data-event="День рождения / девичник">Подготовить праздник →</a>
-      </div>
-      <div class="for-card reveal r3">
-        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="16" cy="19" r="7"/><path d="m12.5 7 3.5 5 3.5-5-1.5-2h-4Z"/></svg>
-        <h3>Предложение руки и сердца</h3><p>Свечи, лепестки, фотограф и тишина. Поможем, чтобы ответом точно было «да».</p>
-        <a href="#" class="link" data-event="Предложение руки и сердца">Подготовить сюрприз →</a>
-      </div>
+      <button class="car-arrow car-prev" id="carPrev" aria-label="Предыдущий">‹</button>
+      <button class="car-arrow car-next" id="carNext" aria-label="Следующий">›</button>
+    </div>
+    <div class="car-tabs" id="carTabs">
+      <button class="car-tab" data-i="0">Вдвоём<i></i></button>
+      <button class="car-tab" data-i="1">Семьёй<i></i></button>
+      <button class="car-tab" data-i="2">Компанией<i></i></button>
+      <button class="car-tab" data-i="3">С собакой<i></i></button>
+      <button class="car-tab" data-i="4">День рождения<i></i></button>
+      <button class="car-tab" data-i="5">Предложение<i></i></button>
     </div>
   </div>
 </section>
@@ -1239,6 +1254,71 @@ footer{margin-top:clamp(60px,8vw,100px);padding-top:24px;border-top:1px solid va
   }));
   document.getElementById('certBtn').addEventListener('click',()=>openModal('Подарочный сертификат','Номинал: <b>'+certSum+'</b><br>Электронный или в деревянной коробке — уточним при звонке.'));
   document.querySelectorAll('[data-event]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();openModal('Подготовим праздник','Повод: <b>'+a.dataset.event+'</b><br>Расскажите о датах и пожеланиях — предложим оформление и сценарий.')}));
+
+  // ===== 3D-карусель «Для кого» =====
+  (function(){
+    const car=document.getElementById('car'),stage=document.getElementById('carStage');
+    const items=[...stage.querySelectorAll('.car-item')],tabs=[...document.querySelectorAll('#carTabs .car-tab')],N=items.length;
+    const DUR=4500; car.style.setProperty('--dur',DUR+'ms');
+    let cur=0,step=26,R=700,maxVis=2,timer=null,hover=false,inView=false;
+    const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function layout(){
+      const W=car.clientWidth,mob=W<640;
+      const w=mob?Math.min(W*.66,280):Math.min(Math.max(W*.22,230),320),h=Math.round(w*1.38);
+      step=mob?38:26;maxVis=mob?1:2;
+      R=(w*.56)/Math.tan(step/2*Math.PI/180);
+      car.style.setProperty('--w',w+'px');car.style.setProperty('--h',h+'px');car.style.setProperty('--ch',(h+70)+'px');
+      stage.style.transform='translateZ('+R+'px)';
+      render(true);
+    }
+    // смещение карточки относительно текущей: -2…3 для шести карточек
+    const offOf=i=>{let o=((i-cur)%N+N)%N;if(o>N/2)o-=N;return o};
+    function render(instant,delta){
+      items.forEach((el,i)=>{
+        const off=offOf(i),vis=Math.abs(off)<=maxVis;
+        // карточка «перескакивает» с одного края на другой — без анимации, чтобы она не пролетала через центр
+        const jump=!instant&&el._off!==undefined&&off!==el._off-(delta||0);
+        if(instant||jump){el.style.transition='none'}
+        el.style.transform='rotateY('+(-off*step)+'deg) translateZ('+(-R)+'px)';
+        el.style.opacity=vis?1:0;el.style.pointerEvents=vis?'auto':'none';
+        el.classList.toggle('active',off===0);
+        el.querySelector('.car-img').style.transform='translateX('+(off*7)+'%)'; // параллакс фото внутри карточки
+        if(instant||jump){void el.offsetWidth;el.style.transition=''}
+        el._off=off;
+      });
+      tabs.forEach((t,i)=>{t.classList.remove('on');if(i===cur){void t.offsetWidth;t.classList.add('on')}});
+    }
+    const playing=()=>!reduce&&!hover&&inView&&!document.hidden&&!body.classList.contains('locked');
+    function schedule(){
+      clearTimeout(timer);const p=playing();car.classList.toggle('paused',!p);
+      if(p){const t=tabs[cur];t.classList.remove('on');void t.offsetWidth;t.classList.add('on'); // полоска прогресса стартует заново
+        timer=setTimeout(()=>{go(cur+1)},DUR)}
+    }
+    function go(i){
+      const next=((i%N)+N)%N;let delta=((next-cur)%N+N)%N;if(delta>N/2)delta-=N; // кратчайший путь: +2, −1…
+      cur=next;render(false,delta);schedule();
+    }
+    document.getElementById('carPrev').addEventListener('click',()=>go(cur-1));
+    document.getElementById('carNext').addEventListener('click',()=>go(cur+1));
+    tabs.forEach(t=>t.addEventListener('click',()=>go(+t.dataset.i)));
+    // клик по боковой фотографии — пролистать к ней
+    stage.addEventListener('click',e=>{const it=e.target.closest('.car-item');if(!it||dragged)return;const i=+it.dataset.i;if(i!==cur){e.preventDefault();e.stopPropagation();go(i)}},true);
+    // свайп и перетаскивание мышью
+    let x0=null,dragged=false;
+    car.addEventListener('pointerdown',e=>{x0=e.clientX;dragged=false});
+    car.addEventListener('pointermove',e=>{if(x0!==null&&Math.abs(e.clientX-x0)>10)dragged=true});
+    car.addEventListener('pointerup',e=>{if(x0===null)return;const dx=e.clientX-x0;x0=null;if(Math.abs(dx)>40){go(cur+(dx<0?1:-1))}setTimeout(()=>dragged=false,0)});
+    car.addEventListener('pointercancel',()=>{x0=null});
+    car.addEventListener('keydown',e=>{if(e.key==='ArrowRight'){e.preventDefault();go(cur+1)}if(e.key==='ArrowLeft'){e.preventDefault();go(cur-1)}});
+    // пауза при наведении, вне экрана и когда открыто окно
+    car.addEventListener('mouseenter',()=>{hover=true;schedule()});
+    car.addEventListener('mouseleave',()=>{hover=false;schedule()});
+    new IntersectionObserver(es=>{inView=es[0].isIntersecting;schedule()},{threshold:.35}).observe(car);
+    document.addEventListener('visibilitychange',schedule);
+    new MutationObserver(schedule).observe(body,{attributes:true,attributeFilter:['class']});
+    let rt2;window.addEventListener('resize',()=>{clearTimeout(rt2);rt2=setTimeout(layout,150)});
+    layout();
+  })();
 
   // ===== Плашка cookies =====
   const cookie=document.getElementById('cookie');let cookieOk=false;
