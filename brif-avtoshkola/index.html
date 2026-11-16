@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta property="og:title" content="Анкета: сайт для автошколы">
+<meta property="og:description" content="10 минут. Ответы сохраняются сами, в конце одна кнопка отправки.">
+</head>
+<body>
+<title>Бриф сайта автошколы</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Russo+One&family=Manrope:wght@400;500;700&display=swap">
+<style>
+/* Layout: анкета в одну колонку, слева на широком экране липкая навигация с прогрессом; акцент — синий дорожного знака и жёлтая разметка */
+:root{
+  --bg:#EEF0F3; --surface:#FFFFFF; --ink:#141922; --muted:#5A6272; --line:#D4D8E0;
+  --blue:#1747B8; --blue-soft:#DFE7FA; --yellow:#F2B705; --yellow-soft:#FBF0CC; --bad:#B4423A;
+  --f-head:"Russo One","Manrope",system-ui,sans-serif;
+  --f-text:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0F1218; --surface:#181D26; --ink:#E6E9EF; --muted:#9AA2B2; --line:#2A3140;
+  --blue:#7EA2F5; --blue-soft:#1E2A47; --yellow:#F5C536; --yellow-soft:#3A3115; --bad:#E57E72; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0F1218; --surface:#181D26; --ink:#E6E9EF; --muted:#9AA2B2; --line:#2A3140;
+  --blue:#7EA2F5; --blue-soft:#1E2A47; --yellow:#F5C536; --yellow-soft:#3A3115; --bad:#E57E72; color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 var(--f-text);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 80px}
+.page{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:220px 1fr;gap:40px;align-items:start}
+h1,h2{font-family:var(--f-head);font-weight:400;text-wrap:balance;line-height:1.2;margin:0}
+h1{font-size:clamp(28px,4.6vw,42px)}
+h2{font-size:21px}
+p{margin:0}
+header{grid-column:1/-1;padding-block:44px 4px;display:grid;gap:14px;max-width:68ch}
+.road{height:6px;width:120px;background:repeating-linear-gradient(90deg,var(--yellow) 0 22px,transparent 22px 34px);border-radius:3px}
+.eyebrow{font:700 12px/1 var(--f-text);letter-spacing:.14em;text-transform:uppercase;color:var(--blue)}
+.lead{font-size:17px;color:var(--muted)}
+.facts{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:14px;color:var(--muted)}
+.facts b{color:var(--ink)}
+
+nav.side{position:sticky;top:calc(env(safe-area-inset-top,0px) + 20px);display:grid;gap:4px}
+nav.side a{display:flex;justify-content:space-between;gap:8px;text-decoration:none;color:var(--muted);font-size:14px;padding:7px 10px;border-radius:9px}
+nav.side a:hover,nav.side a:focus-visible{background:var(--surface);color:var(--ink);outline:none}
+nav.side a.full{color:var(--ink)}
+nav.side a.full::after{content:"✓";color:var(--blue);font-weight:700}
+.meter{height:6px;border-radius:99px;background:var(--line);overflow:hidden;margin:6px 10px 10px}
+.meter i{display:block;height:100%;width:0;background:var(--blue);transition:width .3s}
+.meter-l{font-size:13px;color:var(--muted);padding:0 10px}
+
+form{display:grid;gap:20px;min-width:0}
+fieldset{border:1px solid var(--line);background:var(--surface);border-radius:18px;padding:22px;margin:0;display:grid;gap:18px;min-width:0;scroll-margin-top:20px}
+.sec-head{display:grid;gap:6px}
+.sec-head .n{font:700 12px var(--f-text);color:var(--blue);letter-spacing:.1em}
+.sec-head p{font-size:14px;color:var(--muted)}
+.field{display:grid;gap:7px;min-width:0}
+.field>label,.field>.q{font-weight:700;font-size:15px}
+.hint{font-size:13px;color:var(--muted)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+input[type=text],input[type=tel],input[type=number],textarea{
+  width:100%;font:inherit;font-size:16px;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:11px;padding:10px 12px}
+textarea{min-height:84px;resize:vertical}
+input:focus,textarea:focus{outline:2px solid var(--blue);outline-offset:1px;border-color:transparent}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{position:relative}
+.chip input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.chip span{display:inline-block;border:1px solid var(--line);background:var(--bg);border-radius:999px;padding:7px 14px;font-size:14px;cursor:pointer;user-select:none}
+.chip input:checked+span{background:var(--blue);border-color:var(--blue);color:var(--surface);font-weight:700}
+.chip input:focus-visible+span{outline:2px solid var(--blue);outline-offset:2px}
+
+.rows{display:grid;gap:10px}
+.rowx{display:grid;grid-template-columns:1fr 1fr .9fr .9fr 36px;gap:8px;align-items:end;background:var(--bg);border-radius:12px;padding:10px}
+.rowx label{font-size:12px;color:var(--muted);display:grid;gap:4px}
+.rowx input{background:var(--surface)}
+.icon-btn{width:36px;height:42px;border:1px solid var(--line);background:var(--surface);color:var(--muted);border-radius:10px;cursor:pointer;font-size:18px}
+.icon-btn:hover{color:var(--bad);border-color:var(--bad)}
+.add{justify-self:start;font:700 14px var(--f-text);color:var(--blue);background:transparent;border:1px dashed var(--blue);border-radius:10px;padding:8px 14px;cursor:pointer}
+.ex{border-left:3px solid var(--yellow);background:var(--yellow-soft);border-radius:0 10px 10px 0;padding:10px 14px;font-size:14px}
+
+.send{background:var(--blue);color:var(--surface);border:0}
+.send .sec-head .n,.send .sec-head p{color:inherit;opacity:.85}
+.btns{display:flex;flex-wrap:wrap;gap:10px}
+.btn{font:700 15px var(--f-text);border-radius:12px;padding:12px 18px;cursor:pointer;text-decoration:none;display:inline-block;border:1px solid transparent}
+.btn.light{background:var(--surface);color:var(--blue)}
+.btn.ghost{background:transparent;color:var(--surface);border-color:color-mix(in srgb,var(--surface) 50%,transparent)}
+.btn:focus-visible{outline:2px solid var(--surface);outline-offset:2px}
+.status{font-size:14px;min-height:1.4em}
+pre.out{margin:0;background:color-mix(in srgb,var(--ink) 25%,transparent);color:var(--surface);border-radius:12px;padding:14px;font:13px/1.55 ui-monospace,Menlo,Consolas,monospace;white-space:pre-wrap;max-height:260px;overflow:auto}
+.req{color:var(--bad)}
+.err input{border-color:var(--bad)}
+
+@media (max-width:820px){
+  .page{grid-template-columns:1fr;gap:20px}
+  nav.side{position:static;display:flex;flex-wrap:wrap;gap:6px}
+  nav.side a{background:var(--surface);border:1px solid var(--line)}
+  .meter,.meter-l{display:none}
+}
+@media (max-width:560px){
+  .two{grid-template-columns:1fr}
+  fieldset{padding:16px}
+  .rowx{grid-template-columns:1fr 1fr}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="page">
+<header>
+  <span class="road" aria-hidden="true"></span>
+  <span class="eyebrow">Анкета перед разработкой</span>
+  <h1>Сайт для вашей автошколы</h1>
+  <p class="lead">Одностраничный сайт, который приводит учеников: цены по категориям, преимущества, отзывы и форма записи с заявками прямо в мессенджер. Ответьте на вопросы. Если не знаете ответ, пропускайте вопрос, обсудим на созвоне.</p>
+  <div class="facts"><span>⏱ <b>10 минут</b></span><span>Ответы сохраняются сами, можно закрыть и вернуться</span><span>В конце одна кнопка отправки</span></div>
+</header>
+
+<nav class="side" id="nav" aria-label="Разделы анкеты">
+  <div class="meter" aria-hidden="true"><i id="meter"></i></div>
+  <span class="meter-l" id="meterL"></span>
+</nav>
+
+<form id="f" autocomplete="on" novalidate>
+
+<fieldset data-sec="Контакты" id="s-contacts">
+  <div class="sec-head"><span class="n">РАЗДЕЛ 1</span><h2>Контакты</h2></div>
+  <div class="two">
+    <div class="field"><label for="c_name">Ваше имя <span class="req">*</span></label><input type="text" id="c_name" data-q="Имя" autocomplete="name"></div>
+    <div class="field"><label for="c_phone">Телефон <span class="req">*</span></label><input type="tel" id="c_phone" data-q="Телефон" autocomplete="tel" placeholder="+7"></div>
+  </div>
+  <div class="two">
+    <div class="field"><label for="c_tg">Telegram или WhatsApp</label><input type="text" id="c_tg" data-q="Мессенджер" placeholder="@username"></div>
+    <div class="field"><label for="c_time">Когда удобно созвониться</label><input type="text" id="c_time" data-q="Удобное время" placeholder="будни после 18:00"></div>
+  </div>
+</fieldset>
+
+<fieldset data-sec="Об автошколе" id="s-about">
+  <div class="sec-head"><span class="n">РАЗДЕЛ 2</span><h2>Об автошколе</h2></div>
+  <div class="two">
+    <div class="field"><label for="a_name">Название</label><input type="text" id="a_name" data-q="Название"></div>
+    <div class="field"><label for="a_city">Город</label><input type="text" id="a_city" data-q="Город"></div>
+  </div>
+  <div class="field"><label for="a_addr">Адреса учебных классов и автодрома</label><textarea id="a_addr" data-q="Адреса" placeholder="ул. Ленина, 10 — класс; автодром на ул. Заводской, 3"></textarea></div>
+  <div class="two">
+    <div class="field"><label for="a_year">Год основания</label><input type="text" id="a_year" data-q="Год основания" placeholder="2012"></div>
+    <div class="field"><label for="a_grads">Сколько выпускников</label><input type="text" id="a_grads" data-q="Выпускников" placeholder="более 5 000"></div>
+  </div>
+  <div class="two">
+    <div class="field"><label for="a_pass">Сдают в ГИБДД с первого раза</label><input type="text" id="a_pass" data-q="Сдача с первого раза" placeholder="82%"></div>
+    <div class="field"><label for="a_lic">Номер лицензии на обучение</label><input type="text" id="a_lic" data-q="Лицензия" placeholder="№ Л035-…"><span class="hint">Указывается на сайте, без неё нет налогового вычета.</span></div>
+  </div>
+  <div class="field"><label for="a_why">Чем вы лучше других автошкол в городе</label><textarea id="a_why" data-q="Преимущества" placeholder="Свой автодром, новые машины на АКПП, вождение по выходным, оплата частями"></textarea></div>
+</fieldset>
+
+<fieldset data-sec="Категории и цены" id="s-price">
+  <div class="sec-head"><span class="n">РАЗДЕЛ 3</span><h2>Категории и цены</h2><p>Каждая категория отдельной строкой. На сайте это станет таблицей цен.</p></div>
+  <div class="field">
+    <div class="rows" id="cats"></div>
+    <button type="button" class="add" id="addCat">+ Добавить категорию</button>
+  </div>
+  <div class="field">
+    <span class="q">Способы оплаты</span>
+    <div class="chips" data-q="Оплата">
+      <label class="chip"><input type="checkbox" value="частями без переплаты" id="pay1"><span>Частями без переплаты</span></label>
+      <label class="chip"><input type="checkbox" value="рассрочка через банк" id="pay2"><span>Рассрочка через банк</span></label>
+      <label class="chip"><input type="checkbox" value="карта и СБП" id="pay3"><span>Карта и СБП</span></label>
+      <label class="chip"><input type="checkbox" value="наличные" id="pay4"><span>Наличные</span></label>
+      <label class="chip"><input type="checkbox" value="помощь с налоговым вычетом" id="pay5"><span>Помогаем с налоговым вычетом</span></label>
+    </div>
+  </div>
+  <div class="field"><label for="p_extra">Доп. занятия и сборы</label><textarea id="p_extra" data-q="Доп. услуги" placeholder="Доп. час вождения 1 500 ₽; госпошлина отдельно; медкомиссия на месте"></textarea></div>
+  <div class="field"><label for="p_promo">Акции и скидки</label><textarea id="p_promo" data-q="Акции" placeholder="Студентам −10%; приведи друга — 2 000 ₽"></textarea></div>
+</fieldset>
+
+<fieldset data-sec="Обучение" id="s-study">
+  <div class="sec-head"><span class="n">РАЗДЕЛ 4</span><h2>Как проходит обучение</h2></div>
+  <div class="field">
+    <span class="q">Формат теории</span>
+    <div class="chips" data-q="Теория">
+      <label class="chip"><input type="checkbox" value="очно в классе" id="t1"><span>Очно в классе</span></label>
+      <label class="chip"><input type="checkbox" value="онлайн" id="t2"><span>Онлайн</span></label>
+      <label class="chip"><input type="checkbox" value="вечерние группы" id="t3"><span>Вечерние группы</span></label>
+      <label class="chip"><input type="checkbox" value="группы выходного дня" id="t4"><span>Выходного дня</span></label>
+      <label class="chip"><input type="checkbox" value="ускоренный курс" id="t5"><span>Ускоренный курс</span></label>
+    </div>
+  </div>
+  <div class="field">
+    <span class="q">Коробка передач на учебных машинах</span>
+    <div class="chips" data-q="Коробка">
+      <label class="chip"><input type="checkbox" value="механика" id="g1"><span>Механика</span></label>
+      <label class="chip"><input type="checkbox" value="автомат" id="g2"><span>Автомат</span></label>
+    </div>
+  </div>
+  <div class="two">
+    <div class="field"><label for="s_cars">Автопарк: марки и количество машин</label><input type="text" id="s_cars" data-q="Автопарк" placeholder="8 × Kia Rio, 2 × Lada Vesta"></div>
+    <div class="field"><label for="s_instr">Сколько инструкторов</label><input type="text" id="s_instr" data-q="Инструкторов" placeholder="12"></div>
+  </div>
+  <div class="field">
+    <span class="q">Что ещё есть</span>
+    <div class="chips" data-q="Дополнительно">
+      <label class="chip"><input type="checkbox" value="свой автодром" id="o1"><span>Свой автодром</span></label>
+      <label class="chip"><input type="checkbox" value="выбор инструктора" id="o2"><span>Выбор инструктора</span></label>
+      <label class="chip"><input type="checkbox" value="забираем от дома/метро" id="o3"><span>Забираем от дома</span></label>
+      <label class="chip"><input type="checkbox" value="медкомиссия на месте" id="o4"><span>Медкомиссия на месте</span></label>
+      <label class="chip"><input type="checkbox" value="сопровождение на экзамен в ГИБДД" id="o5"><span>Сопровождение в ГИБДД</span></label>
+      <label class="chip"><input type="checkbox" value="онлайн-тренажёр билетов" id="o6"><span>Тренажёр билетов ПДД</span></label>
+    </div>
+  </div>
+</fieldset>
+
+<fieldset data-sec="Блоки сайта" id="s-blocks">
+  <div class="sec-head"><span class="n">РАЗДЕЛ 5</span><h2>Что должно быть на сайте</h2><p>Отметьте всё, что хотите видеть. Если сомневаетесь, предложим сами.</p></div>
+  <div class="field">
+    <div class="chips" data-q="Блоки">
+      <label class="chip"><input type="checkbox" value="цены по категориям" id="b1"><span>Цены по категориям</span></label>
+      <label class="chip"><input type="checkbox" value="преимущества" id="b2"><span>Преимущества</span></label>
+      <label class="chip"><input type="checkbox" value="этапы обучения" id="b3"><span>Этапы обучения</span></label>
+      <label class="chip"><input type="checkbox" value="инструкторы с фото" id="b4"><span>Инструкторы с фото</span></label>
+      <label class="chip"><input type="checkbox" value="автопарк" id="b5"><span>Автопарк</span></label>
+      <label class="chip"><input type="checkbox" value="отзывы" id="b6"><span>Отзывы</span></label>
+      <label class="chip"><input type="checkbox" value="калькулятор стоимости" id="b7"><span>Калькулятор стоимости</span></label>
+      <label class="chip"><input type="checkbox" value="ближайшие группы и даты старта" id="b8"><span>Даты старта групп</span></label>
+      <label class="chip"><input type="checkbox" value="мини-тест ПДД" id="b9"><span>Мини-тест ПДД</span></label>
+      <label class="chip"><input type="checkbox" value="акция с таймером" id="b10"><span>Акция с таймером</span></label>
+      <label class="chip"><input type="checkbox" value="частые вопросы" id="b11"><span>Частые вопросы</span></label>
+      <label class="chip"><input type="checkbox" value="карта с адресами" id="b12"><span>Карта с адресами</span></label>
+      <label class="chip"><input type="checkbox" value="видео" id="b13"><span>Видео</span></label>
+    </div>
+  </div>
+  <div class="field"><label for="b_faq">Что ученики чаще всего спрашивают по телефону</label><textarea id="b_faq" data-q="Частые вопросы" placeholder="Сколько длится обучение? Можно ли учиться с 16 лет? Что если не сдам?"></textarea></div>
+</fieldset>
+
+<fieldset data-sec="Заявки" id="s-leads">
+  <div class="sec-head"><span class="n">РАЗДЕЛ 6</span><h2>Заявки с сайта</h2></div>
+  <div class="field">
+    <span class="q">Куда присылать заявки</span>
+    <div class="chips" data-q="Заявки">
+      <label class="chip"><input type="checkbox" value="Telegram" id="l1"><span>Telegram</span></label>
+      <label class="chip"><input type="checkbox" value="WhatsApp" id="l2"><span>WhatsApp</span></label>
+      <label class="chip"><input type="checkbox" value="e-mail" id="l3"><span>E-mail</span></label>
+      <label class="chip"><input type="checkbox" value="Google-таблица" id="l4"><span>Google-таблица</span></label>
+      <label class="chip"><input type="checkbox" value="CRM" id="l5"><span>CRM (amoCRM, Битрикс24)</span></label>
+    </div>
+  </div>
+  <div class="field">
+    <span class="q">Что спрашивать в форме записи</span>
+    <div class="chips" data-q="Поля формы">
+      <label class="chip"><input type="checkbox" value="имя и телефон" id="ff1"><span>Имя и телефон</span></label>
+      <label class="chip"><input type="checkbox" value="категория" id="ff2"><span>Категория</span></label>
+      <label class="chip"><input type="checkbox" value="МКПП или АКПП" id="ff3"><span>МКПП или АКПП</span></label>
+      <label class="chip"><input type="checkbox" value="удобный филиал" id="ff4"><span>Филиал</span></label>
+      <label class="chip"><input type="checkbox" value="удобное время занятий" id="ff5"><span>Время занятий</span></label>
+    </div>
+  </div>
+  <div class="field"><label for="l_who">Кто обрабатывает заявки и как быстро перезванивает</label><input type="text" id="l_who" data-q="Обработка заявок" placeholder="администратор, в течение 15 минут"></div>
+</fieldset>
+
+<fieldset data-sec="Стиль и материалы" id="s-style">
+  <div class="sec-head"><span class="n">РАЗДЕЛ 7</span><h2>Стиль и материалы</h2></div>
+  <div class="field">
+    <span class="q">Есть ли логотип и фирменные цвета</span>
+    <div class="chips" data-q="Логотип" data-radio>
+      <label class="chip"><input type="radio" name="logo" value="есть логотип и цвета" id="lg1"><span>Есть логотип и цвета</span></label>
+      <label class="chip"><input type="radio" name="logo" value="только логотип" id="lg2"><span>Только логотип</span></label>
+      <label class="chip"><input type="radio" name="logo" value="нет, нужно придумать" id="lg3"><span>Нет, нужно придумать</span></label>
+    </div>
+  </div>
+  <div class="field">
+    <span class="q">Каким должен быть сайт</span>
+    <div class="chips" data-q="Настроение">
+      <label class="chip"><input type="checkbox" value="надёжный и строгий" id="m1"><span>Надёжный, строгий</span></label>
+      <label class="chip"><input type="checkbox" value="яркий и молодёжный" id="m2"><span>Яркий, молодёжный</span></label>
+      <label class="chip"><input type="checkbox" value="дружелюбный и спокойный" id="m3"><span>Дружелюбный, спокойный</span></label>
+      <label class="chip"><input type="checkbox" value="премиальный" id="m4"><span>Премиальный</span></label>
+    </div>
+  </div>
+  <div class="field"><label for="st_photo">Ссылка на фото и логотип</label><input type="text" id="st_photo" data-q="Фото" placeholder="Яндекс Диск, Google Диск"><span class="hint">Пригодятся фото машин, автодрома, класса, инструкторов и довольных выпускников с правами.</span></div>
+  <div class="field"><label for="st_rev">Где у вас отзывы и соцсети</label><textarea id="st_rev" data-q="Отзывы и соцсети" placeholder="Яндекс Карты, 2ГИС, ВКонтакте, Telegram-канал — ссылки"></textarea></div>
+  <div class="field"><label for="st_like">Сайты, которые нравятся, и конкуренты</label><textarea id="st_like" data-q="Нравятся / конкуренты" placeholder="Ссылки и что именно нравится или не нравится"></textarea></div>
+</fieldset>
+
+<fieldset data-sec="Запуск" id="s-launch">
+  <div class="sec-head"><span class="n">РАЗДЕЛ 8</span><h2>Домен и запуск</h2></div>
+  <div class="field">
+    <span class="q">Есть ли сайт или домен</span>
+    <div class="chips" data-q="Домен" data-radio>
+      <label class="chip"><input type="radio" name="dom" value="есть сайт, делаем новый" id="d1"><span>Есть старый сайт</span></label>
+      <label class="chip"><input type="radio" name="dom" value="есть только домен" id="d2"><span>Есть только домен</span></label>
+      <label class="chip"><input type="radio" name="dom" value="ничего нет" id="d3"><span>Ничего нет</span></label>
+    </div>
+  </div>
+  <div class="two">
+    <div class="field"><label for="la_url">Адрес сайта или желаемый домен</label><input type="text" id="la_url" data-q="Адрес" placeholder="avtoshkola-start.ru"></div>
+    <div class="field"><label for="la_date">Когда нужен сайт</label><input type="text" id="la_date" data-q="Срок" placeholder="к началу набора в январе"></div>
+  </div>
+  <div class="field">
+    <label for="la_req">Реквизиты для политики конфиденциальности</label>
+    <div class="ex">На сайте с формой записи по закону нужна политика обработки персональных данных. Для неё нужны название или ФИО, ИНН, ОГРН и адрес. Можно прислать позже.</div>
+    <textarea id="la_req" data-q="Реквизиты"></textarea>
+  </div>
+  <div class="field">
+    <span class="q">Поддержка после запуска</span>
+    <span class="hint">Хостинг, правки цен и акций, обновления.</span>
+    <div class="chips" data-q="Поддержка" data-radio>
+      <label class="chip"><input type="radio" name="sup" value="нужна" id="su1"><span>Нужна</span></label>
+      <label class="chip"><input type="radio" name="sup" value="справлюсь сам" id="su2"><span>Справлюсь сам</span></label>
+      <label class="chip"><input type="radio" name="sup" value="обсудим" id="su3"><span>Обсудим</span></label>
+    </div>
+  </div>
+  <div class="field"><label for="la_more">Что ещё важно знать</label><textarea id="la_more" data-q="Дополнительно"></textarea></div>
+</fieldset>
+
+<fieldset class="send" id="s-send">
+  <div class="sec-head"><span class="n">ГОТОВО</span><h2>Отправьте ответы</h2><p>Кнопка соберёт ответы в одно сообщение. Выберите чат с разработчиком и нажмите «Отправить».</p></div>
+  <div class="btns">
+    <a class="btn light" id="tg" href="#" target="_blank" rel="noopener">Отправить в Telegram</a>
+    <a class="btn ghost" id="wa" href="#" target="_blank" rel="noopener">WhatsApp</a>
+    <button class="btn ghost" type="button" id="copy">Скопировать текст</button>
+  </div>
+  <p class="status" id="status" role="status"></p>
+  <pre class="out" id="out"></pre>
+</fieldset>
+</form>
+</div>
+
+<script>
+(function(){
+  const KEY='brif-avtoshkola-v1', f=document.getElementById('f');
+
+  /* категории */
+  const cats=document.getElementById('cats');
+  let cid=0;
+  function addCat(v={}){
+    const i=cid++, d=document.createElement('div');d.className='rowx';
+    d.innerHTML=`<label>Категория<input type="text" id="k${i}n" placeholder="B, механика"></label>
+      <label>Цена, ₽<input type="number" min="0" id="k${i}p" placeholder="45000"></label>
+      <label>Срок, мес.<input type="text" id="k${i}t" placeholder="2,5"></label>
+      <label>Часов вождения<input type="number" min="0" id="k${i}h" placeholder="56"></label>
+      <button type="button" class="icon-btn" aria-label="Удалить категорию">×</button>`;
+    d.querySelector('button').onclick=()=>{d.remove();save()};
+    cats.appendChild(d);
+    ['n','p','t','h'].forEach(k=>{if(v[k])d.querySelector(`#k${i}${k}`).value=v[k]});
+  }
+  document.getElementById('addCat').onclick=()=>{addCat();save()};
+
+  const secs=[...f.querySelectorAll('fieldset[data-sec]')], nav=document.getElementById('nav');
+  secs.forEach(s=>nav.insertAdjacentHTML('beforeend',`<a href="#${s.id}" data-for="${s.id}">${s.dataset.sec}</a>`));
+
+  const isRow=id=>/^k\d/.test(id);
+  function rowsData(){
+    return [...cats.querySelectorAll('.rowx')].map(d=>{
+      const g=k=>d.querySelector(`[id$="${k}"]`).value.trim();
+      return {n:g('n'),p:g('p'),t:g('t'),h:g('h')};
+    }).filter(r=>r.n||r.p||r.t||r.h);
+  }
+  function state(){
+    const st={v:{},r:rowsData()};
+    f.querySelectorAll('input,textarea').forEach(el=>{
+      if(!el.id||isRow(el.id))return;
+      if(el.type==='checkbox'||el.type==='radio'){if(el.checked)st.v[el.id]=1}
+      else if(el.value.trim())st.v[el.id]=el.value;
+    });
+    return st;
+  }
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(state()))}catch(e){} update()}
+  function load(){
+    let st=null;try{st=JSON.parse(localStorage.getItem(KEY)||'null')}catch(e){}
+    (st&&st.r&&st.r.length?st.r:[{},{}]).forEach(addCat);
+    if(!st)return;
+    Object.entries(st.v||{}).forEach(([id,val])=>{
+      const el=document.getElementById(id);if(!el)return;
+      if(el.type==='checkbox'||el.type==='radio')el.checked=true;else el.value=val;
+    });
+  }
+
+  function build(){
+    const L=['БРИФ: сайт автошколы',''];
+    secs.forEach(s=>{
+      const lines=[];
+      s.querySelectorAll('.field').forEach(fd=>{
+        const inp=fd.querySelector(':scope > input[data-q], :scope > textarea[data-q]');
+        if(inp&&inp.value.trim()){lines.push(`${inp.dataset.q}: ${inp.value.trim()}`);return}
+        const ch=fd.querySelector(':scope > .chips[data-q]');
+        if(ch){const v=[...ch.querySelectorAll('input:checked')].map(x=>x.value);if(v.length)lines.push(`${ch.dataset.q}: ${v.join(', ')}`)}
+      });
+      if(s.id==='s-price'){
+        rowsData().reverse().forEach(r=>lines.unshift(`• ${r.n||'категория'}${r.p?` — ${Number(r.p).toLocaleString('ru-RU')} ₽`:''}${r.t?`, ${r.t} мес.`:''}${r.h?`, ${r.h} ч вождения`:''}`));
+      }
+      if(lines.length){L.push('▸ '+s.dataset.sec.toUpperCase());L.push(...lines);L.push('')}
+    });
+    return L.join('\n').trim();
+  }
+
+  function filled(s){
+    if(s.id==='s-price'&&rowsData().length)return true;
+    return [...s.querySelectorAll('input,textarea')].some(el=>!isRow(el.id)&&((el.type==='checkbox'||el.type==='radio')?el.checked:el.value.trim()));
+  }
+  function update(){
+    let n=0;
+    secs.forEach(s=>{const ok=filled(s);if(ok)n++;nav.querySelector(`[data-for="${s.id}"]`).classList.toggle('full',ok)});
+    document.getElementById('meter').style.width=(n/secs.length*100)+'%';
+    document.getElementById('meterL').textContent=`Заполнено ${n} из ${secs.length}`;
+    const t=build();document.getElementById('out').textContent=t;
+    const enc=encodeURIComponent(t.length>3500?t.slice(0,3500)+'\n…(полный текст скопирован)':t);
+    document.getElementById('tg').href='https://t.me/share/url?url='+encodeURIComponent(' ')+'&text='+enc;
+    document.getElementById('wa').href='https://wa.me/?text='+enc;
+  }
+
+  function checkReq(){
+    const miss=['c_name','c_phone'].filter(id=>!document.getElementById(id).value.trim());
+    ['c_name','c_phone'].forEach(id=>document.getElementById(id).parentElement.classList.toggle('err',miss.includes(id)));
+    return miss.length===0;
+  }
+  const status=document.getElementById('status');
+  function copyText(){
+    const t=build();
+    const done=()=>{status.textContent='Текст скопирован. Вставьте его в чат с разработчиком.'};
+    const fallback=()=>{const r=document.createRange();r.selectNodeContents(document.getElementById('out'));const s=getSelection();s.removeAllRanges();s.addRange(r);status.textContent='Текст выделен: нажмите «Копировать» в меню или Ctrl+C.'};
+    try{navigator.clipboard.writeText(t).then(done,fallback)}catch(e){fallback()}
+  }
+  ['tg','wa'].forEach(id=>document.getElementById(id).addEventListener('click',e=>{
+    if(!checkReq()){e.preventDefault();status.textContent='Заполните имя и телефон в разделе «Контакты».';document.getElementById('s-contacts').scrollIntoView({behavior:'smooth'});return}
+    try{navigator.clipboard.writeText(build()).catch(()=>{})}catch(err){}
+    status.textContent='Открываем мессенджер. Если сообщение не подставилось, вставьте скопированный текст.';
+  }));
+  document.getElementById('copy').onclick=()=>{if(checkReq())copyText();else status.textContent='Заполните имя и телефон в разделе «Контакты».'};
+
+  load();
+  f.addEventListener('input',save);f.addEventListener('change',save);
+  f.addEventListener('submit',e=>e.preventDefault());
+  update();
+})();
+</script>
+
+</body>
+</html>
